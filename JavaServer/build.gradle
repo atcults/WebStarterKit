@@ -34,7 +34,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version:'3.8.1'
 }
 
-task publish(dependsOn: build) {
+task publish(dependsOn: build) << {
 
     def warFile = "$project.buildDir\\libs\\$publishMap.warFile"
     println "Publising $warFile"
@@ -51,18 +51,4 @@ task publish(dependsOn: build) {
         throw new Exception("Publish war failed:" + proc.err.text)
     else
         print proc.text
-}
-
-task testSql(){
-    def ds = {
-        url = props['database.url']
-        driverClassName = props['database.driverClassName']
-        password = props['database.password']
-        username = props['database.username']
-    }
-
-    def sql = new groovy.sql.Sql(ds)
-    def r = sql.firstRow 'select 1 as val from dual'
-    println r.val
-    
 }
