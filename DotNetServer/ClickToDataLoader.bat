@@ -1,0 +1,1 @@
+psake dataLoad %* & pause

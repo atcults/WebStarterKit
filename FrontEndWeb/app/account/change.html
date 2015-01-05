@@ -1,0 +1,39 @@
+
+<div class="container">
+    <div class="container1">
+        <a class="nav-logo" href="/">
+            <img src="../styles/img/logo.png" height="85" width="190" >
+        </a>
+        <form class="form-margin" role="form">
+            <section>
+                <h1 app-color="white" align="center">{{page.heading}}</h1>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="oldPassword">Current Password</label><br>
+                            <input id="oldPassword" type="text" class="form-style" placeholder="Current Password" data-ng-model="auth.currentPassword" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="newPassword">New Password</label><br>
+                            <input id="newPassword" type="password" class="form-style" placeholder="New Password" data-ng-model="auth.newPassword" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="confirmPassword">Confirm Password</label><br>
+                            <input id="confirmPassword" type="password" class="form-style" placeholder="Confirm Password" data-ng-model="auth.confirmPassword" required autofocus>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn-lg btn-info btn-block btn-style" type="submit" data-ng-click="change()">Change Password</button>
+                            <a class="btn-sm btn-info btn-block btn-home" href="/" align="center">Back To Home</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

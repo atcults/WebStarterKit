@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C79713A6-EC57-43BB-A557-53E2087035A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Action\DisposableAction.cs" />
+    <Compile Include="Base\Cast.cs" />
+    <Compile Include="Base\CastExtensions.cs" />
+    <Compile Include="Base\Enum.cs" />
+    <Compile Include="Base\ExpressionUtil.cs" />
+    <Compile Include="Base\Logger.cs" />
+    <Compile Include="Base\LogType.cs" />
+    <Compile Include="Base\NullOp.cs" />
+    <Compile Include="Base\Operator.cs" />
+    <Compile Include="Base\SerializeExtensions.cs" />
+    <Compile Include="Base\ValidationResult.cs" />
+    <Compile Include="Base\IdNamePair.cs" />
+    <Compile Include="Base\StringEnum.cs" />
+    <Compile Include="Base\ValidationObject.cs" />
+    <Compile Include="Comperator\CompaireNatural.cs" />
+    <Compile Include="Comperator\DistinctTitle.cs" />
+    <Compile Include="Comperator\LinqNumericComparer.cs" />
+    <Compile Include="Comperator\NumericComparer.cs" />
+    <Compile Include="CommonRegistry.cs" />
+    <Compile Include="EncodingHelper\HexEncoding.cs" />
+    <Compile Include="EncodingHelper\UtfEncoding.cs" />
+    <Compile Include="Enumerations\BaseEnumeration.cs" />
+    <Compile Include="Enumerations\ContactType.cs" />
+    <Compile Include="Enumerations\Language.cs" />
+    <Compile Include="Enumerations\Day.cs" />
+    <Compile Include="Enumerations\Gender.cs" />
+    <Compile Include="Enumerations\Industry.cs" />
+    <Compile Include="Enumerations\AccountType.cs" />
+    <Compile Include="Enumerations\AlertStatus.cs" />
+    <Compile Include="Enumerations\EntityType.cs" />
+    <Compile Include="Enumerations\HealthType.cs" />
+    <Compile Include="Enumerations\HolidayType.cs" />
+    <Compile Include="Enumerations\NotificationType.cs" />
+    <Compile Include="Enumerations\Role.cs" />
+    <Compile Include="Enumerations\TaskStatus.cs" />
+    <Compile Include="Enumerations\UserStatus.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
+    <Compile Include="Extensions\EnumerationExtensions.cs" />
+    <Compile Include="Extensions\ExpressionHelper.cs" />
+    <Compile Include="Extensions\GuidExtensions.cs" />
+    <Compile Include="Extensions\ImageUtility.cs" />
+    <Compile Include="Extensions\IntegerExtensions.cs" />
+    <Compile Include="Extensions\ObjectHelper.cs" />
+    <Compile Include="Extensions\PrimitiveExtensions.cs" />
+    <Compile Include="Extensions\ReflectionHelper.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\XmlEnumExtension.cs" />
+    <Compile Include="Helpers\Formatter.cs" />
+    <Compile Include="Helpers\GuidComb.cs" />
+    <Compile Include="Helpers\Method.cs" />
+    <Compile Include="Helpers\NameHelper.cs" />
+    <Compile Include="Helpers\Property.cs" />
+    <Compile Include="Helpers\Soundex.cs" />
+    <Compile Include="Helpers\SystemTime.cs" />
+    <Compile Include="Mail\Async\ImapDataReceiveContext.cs" />
+    <Compile Include="Mail\Async\Pop3DataReceiveContext.cs" />
+    <Compile Include="Mail\Async\SmtpDataReceiveContext.cs" />
+    <Compile Include="Mail\Common\ContentDisposition.cs" />
+    <Compile Include="Mail\Common\ContentType.cs" />
+    <Compile Include="Mail\Common\Cryptography.cs" />
+    <Compile Include="Mail\Common\FieldParameterEncoding.cs" />
+    <Compile Include="Mail\Common\InternetTextMessage.cs" />
+    <Compile Include="Mail\Common\MailAddress.cs" />
+    <Compile Include="Mail\Common\MailClientException.cs" />
+    <Compile Include="Mail\Common\MailContent.cs" />
+    <Compile Include="Mail\Common\MailMessage.cs" />
+    <Compile Include="Mail\Common\MailParser.cs" />
+    <Compile Include="Mail\Common\MailPriority.cs" />
+    <Compile Include="Mail\Common\MimeContent.cs" />
+    <Compile Include="Mail\Common\TransferEncoding.cs" />
+    <Compile Include="Mail\Imap\Command\CapabilityResult.cs" />
+    <Compile Include="Mail\Imap\Command\ImapCommandResult.cs" />
+    <Compile Include="Mail\Imap\Command\ImapCommandResultStatus.cs" />
+    <Compile Include="Mail\Imap\Command\ImapIdleCommand.cs" />
+    <Compile Include="Mail\Imap\Command\ImapIdleCommandMessage.cs" />
+    <Compile Include="Mail\Imap\Command\ImapIdleCommandMessageReceivedEventArgs.cs" />
+    <Compile Include="Mail\Imap\Command\ImapIdleCommandMessageType.cs" />
+    <Compile Include="Mail\Imap\Command\ListLineResult.cs" />
+    <Compile Include="Mail\Imap\Command\ListResult.cs" />
+    <Compile Include="Mail\Imap\Command\SearchResult.cs" />
+    <Compile Include="Mail\Imap\Command\SelectResult.cs" />
+    <Compile Include="Mail\Imap\Command\Store.cs" />
+    <Compile Include="Mail\Imap\Command\XListLineResult.cs" />
+    <Compile Include="Mail\Imap\Command\XListResult.cs" />
+    <Compile Include="Mail\Imap\ImapClient.cs" />
+    <Compile Include="Mail\Imap\ImapConnectionState.cs" />
+    <Compile Include="Mail\Imap\ImapFolder.cs" />
+    <Compile Include="Mail\Imap\NamingConversion.cs" />
+    <Compile Include="Mail\Pop3\Command\DeleCommand.cs" />
+    <Compile Include="Mail\Pop3\Command\ListCommand.cs" />
+    <Compile Include="Mail\Pop3\Command\ListCommandResult.cs" />
+    <Compile Include="Mail\Pop3\Command\Pop3Command.cs" />
+    <Compile Include="Mail\Pop3\Command\Pop3CommandResult.cs" />
+    <Compile Include="Mail\Pop3\Command\RetrCommand.cs" />
+    <Compile Include="Mail\Pop3\Command\StatCommandResult.cs" />
+    <Compile Include="Mail\Pop3\Command\TopCommand.cs" />
+    <Compile Include="Mail\Pop3\Command\UidlCommand.cs" />
+    <Compile Include="Mail\Pop3\Command\UidlCommandResult.cs" />
+    <Compile Include="Mail\Pop3\InvalidPop3MessageException.cs" />
+    <Compile Include="Mail\Pop3\Pop3AuthenticateMode.cs" />
+    <Compile Include="Mail\Pop3\Pop3Client.cs" />
+    <Compile Include="Mail\Pop3\Pop3ConnectionState.cs" />
+    <Compile Include="Mail\Smtp\Command\DataCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\EhloCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\ExpnCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\HeloCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\HelpCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\MailCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\RcptCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\RsetCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\SmtpCommand.cs" />
+    <Compile Include="Mail\Smtp\Command\SmtpCommandResult.cs" />
+    <Compile Include="Mail\Smtp\Command\SmtpCommandResultLine.cs" />
+    <Compile Include="Mail\Smtp\Command\VrfyCommand.cs" />
+    <Compile Include="Mail\Smtp\SendMail\SendMailCommand.cs" />
+    <Compile Include="Mail\Smtp\SendMail\SendMailListResult.cs" />
+    <Compile Include="Mail\Smtp\SendMail\SendMailResult.cs" />
+    <Compile Include="Mail\Smtp\SendMail\SendMailResultState.cs" />
+    <Compile Include="Mail\Smtp\SmtpAuthenticateMode.cs" />
+    <Compile Include="Mail\Smtp\SmtpClient.cs" />
+    <Compile Include="Mail\Smtp\SmtpConnectionState.cs" />
+    <Compile Include="Mail\Smtp\SmtpContent.cs" />
+    <Compile Include="Mail\Smtp\SmtpMessage.cs" />
+    <Compile Include="Mail\Smtp\SmtpResponseCode.cs" />
+    <Compile Include="Net\Core\AsciiCharCode.cs" />
+    <Compile Include="Net\Core\AsciiCharCodeExtension.cs" />
+    <Compile Include="Net\Core\AsyncHttpCallErrorEventArgs.cs" />
+    <Compile Include="Net\Core\AsyncHttpContext.cs" />
+    <Compile Include="Net\Core\AsyncSocketCallErrorEventArgs.cs" />
+    <Compile Include="Net\Core\EncodingExtensions.cs" />
+    <Compile Include="Net\Core\Helper.cs" />
+    <Compile Include="Net\Core\HttpWebRequestCreatedEventArgs.cs" />
+    <Compile Include="Net\Core\ResponseObject.cs" />
+    <Compile Include="Net\Core\ResponseObjectParseException.cs" />
+    <Compile Include="Net\Core\StreamWriteContext.cs" />
+    <Compile Include="Net\Core\XmlAttribute.cs" />
+    <Compile Include="Net\Core\XmlData.cs" />
+    <Compile Include="Net\Extensions\DictionaryParserExtensions.cs" />
+    <Compile Include="Net\Extensions\StreamExtensions.cs" />
+    <Compile Include="Net\Extensions\XmlParserExtensions.cs" />
+    <Compile Include="Net\Http\ContentType.cs" />
+    <Compile Include="Net\Http\HttpBodyFormData.cs" />
+    <Compile Include="Net\Http\HttpBodyFormUrlEncodedData.cs" />
+    <Compile Include="Net\Http\HttpBodyMultipartFormData.cs" />
+    <Compile Include="Net\Http\HttpClient.Async.cs" />
+    <Compile Include="Net\Http\HttpClient.AsyncCall.cs" />
+    <Compile Include="Net\Http\HttpClient.cs" />
+    <Compile Include="Net\Http\HttpClient.SyncCall.cs" />
+    <Compile Include="Net\Http\HttpMethodName.cs" />
+    <Compile Include="Net\Http\HttpProtocolType.cs" />
+    <Compile Include="Net\Http\HttpRequestCommand.cs" />
+    <Compile Include="Net\Http\HttpRequestUploadingEventArgs.cs" />
+    <Compile Include="Net\Http\HttpResponse.cs" />
+    <Compile Include="Net\Http\HttpResponseException.cs" />
+    <Compile Include="Net\Proxy\EventArgs\CreateConnectionAsyncCompletedEventArgs.cs" />
+    <Compile Include="Net\Proxy\Exceptions\ProxyException.cs" />
+    <Compile Include="Net\Proxy\HttpProxyClient.cs" />
+    <Compile Include="Net\Proxy\IProxyClient.cs" />
+    <Compile Include="Net\Proxy\ProxyClientFactory.cs" />
+    <Compile Include="Net\Proxy\ProxyType.cs" />
+    <Compile Include="Net\Proxy\Socks4aProxyClient.cs" />
+    <Compile Include="Net\Proxy\Socks4ProxyClient.cs" />
+    <Compile Include="Net\Proxy\Socks5ProxyClient.cs" />
+    <Compile Include="Net\Proxy\Utils.cs" />
+    <Compile Include="Net\SocketClient\BufferManager.cs" />
+    <Compile Include="Net\SocketClient\DataReceiveContext.cs" />
+    <Compile Include="Net\SocketClient\DataReceiveContextException.cs" />
+    <Compile Include="Net\SocketClient\DataSendContext.cs" />
+    <Compile Include="Net\SocketClient\DataTransferContext.cs" />
+    <Compile Include="Net\SocketClient\SocketClient.cs" />
+    <Compile Include="Net\SocketClient\SocketClientException.cs" />
+    <Compile Include="OpenXml\DynamicExport.cs" />
+    <Compile Include="OpenXml\ExportSimple.cs" />
+    <Compile Include="OpenXml\SimpleTableExport.cs" />
+    <Compile Include="SerializerHelper\BinarySerializer.cs" />
+    <Compile Include="SerializerHelper\DataContractSerializer.cs" />
+    <Compile Include="SerializerHelper\Xml2Obj.cs" />
+    <Compile Include="SerializerHelper\XmlSerializer.cs" />
+    <Compile Include="Service\ICryptographer.cs" />
+    <Compile Include="Service\IDayDescriptionService.cs" />
+    <Compile Include="Service\IEmailSender.cs" />
+    <Compile Include="Service\Impl\ConfigProvider.cs" />
+    <Compile Include="Service\Impl\Cryptographer.cs" />
+    <Compile Include="Service\Impl\CustomXmlSerializer.cs" />
+    <Compile Include="Service\Impl\DataContractJsonSerialization.cs" />
+    <Compile Include="Service\Impl\DayDescriptionService.cs" />
+    <Compile Include="Base\DayDescription.cs" />
+    <Compile Include="Base\Holiday.cs" />
+    <Compile Include="Service\Impl\EmailSender.cs" />
+    <Compile Include="Service\Impl\JsonSerialization.cs" />
+    <Compile Include="Service\Impl\ServiceBase.cs" />
+    <Compile Include="Service\Impl\SmsSender.cs" />
+    <Compile Include="Service\ISerialization.cs" />
+    <Compile Include="Service\IServiceCommon.cs" />
+    <Compile Include="Service\ISmsSender.cs" />
+    <Compile Include="StringHelper\GeneralFunctions.cs" />
+    <Compile Include="StringHelper\RsaEncryption.cs" />
+    <Compile Include="SystemSettings\DatabaseConfig.cs" />
+    <Compile Include="SystemSettings\DatabaseSchemaConfig.cs" />
+    <Compile Include="SystemSettings\EmailConfig.cs" />
+    <Compile Include="SystemSettings\GeneralConfig.cs" />
+    <Compile Include="SystemSettings\Globals.cs" />
+    <Compile Include="SystemSettings\NetworkConfig.cs" />
+    <Compile Include="SystemSettings\SchemaConfig.cs" />
+    <Compile Include="SystemSettings\SmsConfig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

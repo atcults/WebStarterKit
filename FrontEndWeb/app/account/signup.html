@@ -1,0 +1,39 @@
+
+<div class="container">
+    <div class="container1">
+        <a class="nav-logo" href="/">
+            <img src="../styles/img/logo.png" height="85" width="190" >
+        </a>
+        <form class="form-margin" role="form">
+            <section>
+                <h1 app-color="white"align="center">{{page.heading}}</h1>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--<label for="userName">User Name</label><br>-->
+                            <input id="userName" type="text" class="form-style" placeholder="User Name" data-ng-model="auth.signUpUserName" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--<label for="emailId">Email</label><br>-->
+                            <input id="emailId" type="text" class="form-style" placeholder="Email" data-ng-model="auth.signUpEmail" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <label for="password">Password</label><br>-->
+                            <input id="password" type="password" class="form-style" placeholder="Password" data-ng-model="auth.signUpPassword" required autofocus>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class=" btn-lg btn-info btn-block btn-style" type="submit" data-ng-click="signup()">Sign Up</button>
+                            <a class="btn-sm btn-info btn-block btn-home" href="/" align="center">Back To Home</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

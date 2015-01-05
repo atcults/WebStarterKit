@@ -1,0 +1,77 @@
+
+<div class="container">
+    <div class="container1">
+        <a class="nav-logo" href="/">
+            <img src="../styles/img/logo.png" height="85" width="190" >
+        </a>
+        <form class="form-margin" role="form">
+            <section>
+                <h1 app-color="white" align="center">{{page.heading}}</h1>
+                <div class="form-group ">
+                    <label for="username" app-color="white">User Name</label><br>
+                    <input id="username" type="text" class="form-style" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+                </div>
+                <div class="form-group ">
+                    <label for="password" app-color="white">Password</label><br>
+                    <input id="password" type="password" class="form-style"  placeholder="Password" data-ng-model="loginData.password" required>
+                </div>
+                <div class="form-group">
+                    <label app-color="white"> Remember Me!</label>
+                    <input type="checkbox" data-ng-model="loginData.useRefreshTokens">
+                </div>
+                <div class="form-group">
+                    <a href="/account/reset" app-color="white">Forget password ?</a>
+                </div>
+
+                <button class="btn-lg btn-info btn-block btn-style" type="submit" data-ng-click="login()">Login</button>
+                <a class="btn-sm btn-info btn-block btn-home" href="/" align="center">Back To Home</a>
+            </section>
+        </form>
+    </div><br/>
+    <div class="footer">
+        <div class="row">
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>Mobile Recharge</b></li><br>
+                    <li><a href="" app-color="orange" title="vodafon recharge" target="_blank">Vodafon Recharge</a></li>
+                    <li><a href="" app-color="orange" title="airtel recharge" target="_blank">Airtel Recharge</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>DTH Recharge</b></li><br>
+                    <li><a href="" app-color="orange" title="Airtel DTH Recharge" >Airtel DTH Recharge</a></li>
+                    <li><a href="" app-color="orange" title="videocon D2H Recharge">Videocon D2H Recharge</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>DataCard Recharge</b></li><br>
+                    <li><a href="" app-color="orange" title="BSNL Datacard" target="_blank">BSNL DataCard</a></li>
+                    <li><a href="" app-color="orange" title="Reliance NetConnect" target="_blank">Reliance NetConnect</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>Mobile Bill Payment</b></li><br>
+                    <li><a href="" app-color="orange" title="Airtel Bill Payment" target="_blank">Airtel Bill Payment</a></li>
+                    <li><a href="" app-color="orange" title="BSNL Bill Payment" target="_blank">BSNL Bill Payment</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>Landline Bill Payment</b></li><br>
+                    <li><a href="" app-color="orange" title="Airtel Landline Bill" target="_blank">Airtel Landline Bill</a></li>
+                    <li><a href="" app-color="orange" title="BSNL Landline Bill" target="_blank">BSNL Landline Bill</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <ul>
+                    <li class="heading" app-color="white"><b>DataCard Bill Payment</b></li><br>
+                    <li><a href="" app-color="orange" title="Airtel Bill Payment" target="_blank">Reliance Netconnect Bill Payment</a></li>
+                    <li><a href="" app-color="orange" title="BSNL Bill Payment" target="_blank">Tata Photon Bill Payment</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

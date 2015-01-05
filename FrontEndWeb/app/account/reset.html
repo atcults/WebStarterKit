@@ -1,0 +1,19 @@
+<form class="form-forgetpass" role="form">
+    <section>
+        <h1 app-color="green">{{page.heading}}</h1>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="username">Email address</label>
+                    <input id="username" type="text" class="form-control" placeholder="Email Address" data-ng-model="auth.forgetEmail" required autofocus>
+                </div>
+            </div><br/>
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-sm btn-info btn-block" type="submit" data-ng-click="reset()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+</section>
+    </form>

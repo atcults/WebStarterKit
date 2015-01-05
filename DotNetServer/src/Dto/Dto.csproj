@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1542838F-CF76-468E-8D8D-2E65A97C5A46}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dto</RootNamespace>
+    <AssemblyName>Dto</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiRequests\SimpleSearch.cs" />
+    <Compile Include="ApiRequests\FormBase.cs" />
+    <Compile Include="ApiRequests\AppUserForms\AddAppUserForm.cs" />
+    <Compile Include="ApiRequests\NewsLetter\AddNewsLetterForm.cs" />
+    <Compile Include="ApiRequests\NewsLetter\UpdateNewsLetterForm.cs" />
+    <Compile Include="ApiRequests\LeadForms\AddAnonymousLeadForm.cs" />
+    <Compile Include="ApiRequests\LeadForms\AddLeadForm.cs" />
+    <Compile Include="ApiRequests\LeadForms\UpdateLeadForm.cs" />
+    <Compile Include="ApiRequests\AttachmentForms\UpdateAttachmentForm.cs" />
+    <Compile Include="ApiRequests\ContactForms\UpdateAssignedContactForm.cs" />
+    <Compile Include="ApiRequests\ContactForms\UpdateContactForm.cs" />
+    <Compile Include="ApiRequests\ContactForms\AddAssignedContactForm.cs" />
+    <Compile Include="ApiRequests\ContactForms\AddContactForm.cs" />
+    <Compile Include="ApiRequests\AttachmentForms\AttachmentUploadForm.cs" />
+    <Compile Include="ApiRequests\AppUserForms\UpdateAppUserForm.cs" />
+    <Compile Include="ApiRequests\NoteForms\AddNoteForm.cs" />
+    <Compile Include="ApiRequests\AuditedForm.cs" />
+    <Compile Include="ApiRequests\NoteForms\UpdateNoteForm.cs" />
+    <Compile Include="ApiRequests\SearchSpecification.cs" />
+    <Compile Include="ApiRequests\TemplateForms\AddTemplateForm.cs" />
+    <Compile Include="ApiRequests\ReportRequestForm.cs" />
+    <Compile Include="ApiRequests\TemplateForms\UpdateTemplateForm.cs" />
+    <Compile Include="ApiResponses\ArrayResponse.cs" />
+    <Compile Include="ApiResponses\AttachmentResponses\AttachmentSearchResponse.cs" />
+    <Compile Include="ApiRequests\IWebApiRequest.cs" />
+    <Compile Include="ApiResponses\IWebApiResponse.cs" />
+    <Compile Include="ApiResponses\NewsLetter\NewsLetterResponse.cs" />
+    <Compile Include="ApiResponses\TaskLogResponses\TaskLogDetailResponse.cs" />
+    <Compile Include="ApiResponses\TaskLogResponses\TaskLogResponse.cs" />
+    <Compile Include="ApiResponses\TemplateResponses\TemplateResponse.cs" />
+    <Compile Include="ApiResponses\AttachmentResponses\AttachmentResponse.cs" />
+    <Compile Include="ApiResponses\AuditedResponse.cs" />
+    <Compile Include="ApiResponses\DetailResponse.cs" />
+    <Compile Include="ApiResponses\ContactResponses\AssignedContactLine.cs" />
+    <Compile Include="ApiResponses\ContactResponses\AssignedContactResponse.cs" />
+    <Compile Include="ApiResponses\ContactResponses\ContactDetailResponse.cs" />
+    <Compile Include="ApiResponses\ContactResponses\ContactLine.cs" />
+    <Compile Include="ApiResponses\ContactResponses\ContactResponse.cs" />
+    <Compile Include="ApiResponses\LeadResponses\LeadDetailResponse.cs" />
+    <Compile Include="ApiResponses\LeadResponses\LeadLine.cs" />
+    <Compile Include="ApiResponses\LeadResponses\LeadResponse.cs" />
+    <Compile Include="ApiResponses\ConfigResponses\EmailConfigResponse.cs" />
+    <Compile Include="ApiResponses\HealthResponses\HealthResponse.cs" />
+    <Compile Include="ApiResponses\AuditedLineResponse.cs" />
+    <Compile Include="ApiResponses\AttachmentResponses\AttachmentLine.cs" />
+    <Compile Include="ApiResponses\NoteResponses\NoteLine.cs" />
+    <Compile Include="ApiResponses\AppUserResponses\AppUserLine.cs" />
+    <Compile Include="ApiResponses\ConfigResponses\NetworkConfigResponse.cs" />
+    <Compile Include="ApiResponses\NoteResponses\NoteResponse.cs" />
+    <Compile Include="ApiResponses\PageResponse.cs" />
+    <Compile Include="ApiResponses\ConfigResponses\SmsConfigResponse.cs" />
+    <Compile Include="ApiResponses\TemplateResponses\TemplateLine.cs" />
+    <Compile Include="ApiRequests\AppUserForms\ChangePasswordForm.cs" />
+    <Compile Include="ApiRequests\ConfigForms\EmailConfigForm.cs" />
+    <Compile Include="ApiRequests\AppUserForms\RegistrationForm.cs" />
+    <Compile Include="ApiRequests\ConfigForms\SendMailForm.cs" />
+    <Compile Include="ApiRequests\ConfigForms\NetworkConfigForm.cs" />
+    <Compile Include="ApiRequests\AppUserForms\LoginForm.cs" />
+    <Compile Include="ApiRequests\ConfigForms\SmsConfigForm.cs" />
+    <Compile Include="ApiRequests\AppUserForms\RecoverPasswordForm.cs" />
+    <Compile Include="ApiRequests\AppUserForms\ResetPasswordForm.cs" />
+    <Compile Include="ApiResponses\AppUserResponses\AppUserResponse.cs" />
+    <Compile Include="ApiResponses\TaskLogResponses\TaskLogLine.cs" />
+    <Compile Include="ApiResponses\WebApiResponseBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C79713A6-EC57-43BB-A557-53E2087035A5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

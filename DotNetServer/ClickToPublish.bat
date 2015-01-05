@@ -1,0 +1,1 @@
+psake publish %* & pause

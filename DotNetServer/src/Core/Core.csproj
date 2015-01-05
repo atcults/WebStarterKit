@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E06ABE08-4217-4570-A376-CD6923EF9EB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.5.0.1\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Commands\AppUserCommands\AddAppUser.cs" />
+    <Compile Include="Commands\AppUserCommands\ChangePassword.cs" />
+    <Compile Include="Commands\AppUserCommands\DeleteAppUser.cs" />
+    <Compile Include="Commands\AppUserCommands\UpdateAppUser.cs" />
+    <Compile Include="Commands\AttachmentCommands\AddAttachment.cs" />
+    <Compile Include="Commands\AttachmentCommands\DeleteAttachment.cs" />
+    <Compile Include="Commands\AttachmentCommands\UpdateAttachment.cs" />
+    <Compile Include="Commands\AuditedCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandCoordinator.cs" />
+    <Compile Include="Commands\ContactCommands\AddAssignedContact.cs" />
+    <Compile Include="Commands\ContactCommands\AddContact.cs" />
+    <Compile Include="Commands\ContactCommands\DeleteAssignedContact.cs" />
+    <Compile Include="Commands\ContactCommands\DeleteContact.cs" />
+    <Compile Include="Commands\ContactCommands\UpdateAssignedContact.cs" />
+    <Compile Include="Commands\ContactCommands\UpdateContact.cs" />
+    <Compile Include="Commands\ICommandProcessor.cs" />
+    <Compile Include="Commands\ICommandRecorder.cs" />
+    <Compile Include="Commands\LeadCommands\AddLead.cs" />
+    <Compile Include="Commands\LeadCommands\DeleteLead.cs" />
+    <Compile Include="Commands\LeadCommands\UpdateLead.cs" />
+    <Compile Include="Commands\NewsLetterCommands\AddNewsLetter.cs" />
+    <Compile Include="Commands\NewsLetterCommands\DeleteNewsLetter.cs" />
+    <Compile Include="Commands\NewsLetterCommands\UpdateNewsLetter.cs" />
+    <Compile Include="Commands\NoteCommands\AddNote.cs" />
+    <Compile Include="Commands\NoteCommands\DeleteNote.cs" />
+    <Compile Include="Commands\NoteCommands\UpdateNote.cs" />
+    <Compile Include="Commands\TaskLogCommands\AddTaskLog.cs" />
+    <Compile Include="Commands\TaskLogCommands\DeleteTaskLog.cs" />
+    <Compile Include="Commands\TemplateCommands\AddTemplate.cs" />
+    <Compile Include="Commands\TemplateCommands\DeleteTemplate.cs" />
+    <Compile Include="Commands\TemplateCommands\UpdateTemplate.cs" />
+    <Compile Include="Domain\Model\AssignedContact.cs" />
+    <Compile Include="Domain\Model\NewsLetter.cs" />
+    <Compile Include="Domain\Model\TaskLog.cs" />
+    <Compile Include="ViewOnly\IHealthViewRepository.cs" />
+    <Compile Include="ViewOnly\Impl\HealthViewRepository.cs" />
+    <Compile Include="Processors\AssignedContactProcessors\AddAssignedContactProcessor.cs" />
+    <Compile Include="Processors\AssignedContactProcessors\DeleteAssignedContactProcessor.cs" />
+    <Compile Include="Processors\AssignedContactProcessors\UpdateAssignedContactProcessor.cs" />
+    <Compile Include="Processors\AttachmentProcessors\AddAttachmentProcessor.cs" />
+    <Compile Include="Processors\AttachmentProcessors\DeleteAttachmentProcessor.cs" />
+    <Compile Include="Processors\AttachmentProcessors\UpdateAttachmentProcessor.cs" />
+    <Compile Include="Processors\NewsLetterProcessors\AddNewsLetterProcessor.cs" />
+    <Compile Include="Processors\NewsLetterProcessors\DeleteNewsLetterProcessor.cs" />
+    <Compile Include="Processors\NewsLetterProcessors\UpdateNewsLetterProcessor.cs" />
+    <Compile Include="Processors\LeadsProcessors\AddLeadsProcessor.cs" />
+    <Compile Include="Processors\LeadsProcessors\DeleteLeadsProcessor.cs" />
+    <Compile Include="Processors\LeadsProcessors\UpdateLeadsProcessor.cs" />
+    <Compile Include="Processors\AppUserProcessors\ChangePasswordProcessor.cs" />
+    <Compile Include="Processors\ContactProcessors\AddContactProcessor.cs" />
+    <Compile Include="Processors\ContactProcessors\DeleteContactProcessor.cs" />
+    <Compile Include="Processors\ContactProcessors\UpdateContactProcessor.cs" />
+    <Compile Include="Processors\AppUserProcessors\AddAppUserProcessor.cs" />
+    <Compile Include="Processors\AppUserProcessors\DeleteAppUserProcessor.cs" />
+    <Compile Include="Processors\AppUserProcessors\UpdateAppUserProcessor.cs" />
+    <Compile Include="Processors\NoteProcessors\AddNoteProcessor.cs" />
+    <Compile Include="Processors\NoteProcessors\DeleteNoteProcessor.cs" />
+    <Compile Include="Processors\NoteProcessors\UpdateNoteProcessor.cs" />
+    <Compile Include="Processors\TaskLogProcessors\AddTaskLogProcessor.cs" />
+    <Compile Include="Processors\TaskLogProcessors\DeleteTaskLogProcessor.cs" />
+    <Compile Include="Processors\TemplateProcessors\AddTemplateProcessor.cs" />
+    <Compile Include="Processors\TemplateProcessors\DeleteTemplateProcessor.cs" />
+    <Compile Include="Processors\TemplateProcessors\UpdateTemplateProcessor.cs" />
+    <Compile Include="Domain\Model\Attachment.cs" />
+    <Compile Include="Domain\Model\Contact.cs" />
+    <Compile Include="Domain\Model\Health.cs" />
+    <Compile Include="Domain\Model\Lead.cs" />
+    <Compile Include="Domain\Model\Note.cs" />
+    <Compile Include="Domain\Model\AppUser.cs" />
+    <Compile Include="Domain\Model\Template.cs" />
+    <Compile Include="Domain\Model\ValueObjects\EmailAlert.cs" />
+    <Compile Include="Domain\Model\ValueObjects\SmsLog.cs" />
+    <Compile Include="Domain\DomainProcessException.cs" />
+    <Compile Include="ReadWrite\Attribute\EntityNameAttribute.cs" />
+    <Compile Include="ReadWrite\Base\AuditedEntity.cs" />
+    <Compile Include="ReadWrite\Base\Entity.cs" />
+    <Compile Include="ReadWrite\Base\IAuditedEntity.cs" />
+    <Compile Include="ReadWrite\Base\IEntity.cs" />
+    <Compile Include="ReadWrite\Base\ListItem.cs" />
+    <Compile Include="ReadWrite\Base\ValueObject.cs" />
+    <Compile Include="ReadWrite\DataRecordExtention.cs" />
+    <Compile Include="ReadWrite\Impl\Repository.cs" />
+    <Compile Include="ReadWrite\Impl\UnitOfWork.cs" />
+    <Compile Include="ReadWrite\IRepository.cs" />
+    <Compile Include="ReadWrite\IShouldPassSqlParameter.cs" />
+    <Compile Include="ReadWrite\IShouldReadDataReader.cs" />
+    <Compile Include="ReadWrite\IUnitOfWork.cs" />
+    <Compile Include="CoreRegistry.cs" />
+    <Compile Include="ViewOnly\Base\AnsiString.cs" />
+    <Compile Include="ViewOnly\Base\ArrayKey.cs" />
+    <Compile Include="ViewOnly\Base\AuditedView.cs" />
+    <Compile Include="ViewOnly\Base\AutoSelectHelper.cs" />
+    <Compile Include="ViewOnly\Base\Cache.cs" />
+    <Compile Include="ViewOnly\Base\ColumnAttribute.cs" />
+    <Compile Include="ViewOnly\Base\ColumnInfo.cs" />
+    <Compile Include="ViewOnly\Base\CustomFilterHelper.cs" />
+    <Compile Include="ViewOnly\Database.cs" />
+    <Compile Include="ViewOnly\DbType\DatabaseType.cs" />
+    <Compile Include="ViewOnly\Base\EnumMapper.cs" />
+    <Compile Include="ViewOnly\Base\ExpandoColumn.cs" />
+    <Compile Include="ViewOnly\Base\ExplicitColumnsAttribute.cs" />
+    <Compile Include="ViewOnly\Base\IAuditedView.cs" />
+    <Compile Include="ViewOnly\IMapper.cs" />
+    <Compile Include="ViewOnly\Base\IView.cs" />
+    <Compile Include="ViewOnly\IViewRepository.cs" />
+    <Compile Include="ViewOnly\Mappers.cs" />
+    <Compile Include="ViewOnly\Base\MultiPocoFactory.cs" />
+    <Compile Include="ViewOnly\DbType\MySqlDatabaseType.cs" />
+    <Compile Include="ViewOnly\DbType\OracleDatabaseType.cs" />
+    <Compile Include="ViewOnly\Base\Page.cs" />
+    <Compile Include="ViewOnly\Base\PagingHelper.cs" />
+    <Compile Include="ViewOnly\Base\ParametersHelper.cs" />
+    <Compile Include="ViewOnly\Base\PocoColumn.cs" />
+    <Compile Include="ViewOnly\Base\PocoData.cs" />
+    <Compile Include="ViewOnly\DbType\PostgreSqlDatabaseType.cs" />
+    <Compile Include="ViewOnly\Base\PropertyUtils.cs" />
+    <Compile Include="ViewOnly\Base\Singleton.cs" />
+    <Compile Include="ViewOnly\Base\Sql.cs" />
+    <Compile Include="ViewOnly\DbType\SqLiteDatabaseType.cs" />
+    <Compile Include="ViewOnly\DbType\SqlServerCeDatabaseType.cs" />
+    <Compile Include="ViewOnly\DbType\SqlServerDatabaseType.cs" />
+    <Compile Include="ViewOnly\Impl\StandardMapper.cs" />
+    <Compile Include="ViewOnly\Base\View.cs" />
+    <Compile Include="ViewOnly\Base\ViewInfo.cs" />
+    <Compile Include="ViewOnly\Attribute\ViewNameAttribute.cs" />
+    <Compile Include="ViewOnly\Impl\ViewRepository.cs" />
+    <Compile Include="ViewOnly\ViewRepositoryHelper.cs" />
+    <Compile Include="Views\AppUserView.cs" />
+    <Compile Include="Views\AssignedContactView.cs" />
+    <Compile Include="Views\AttachmentView.cs" />
+    <Compile Include="Views\AuditedCommandView.cs" />
+    <Compile Include="Views\ContactView.cs" />
+    <Compile Include="Views\HealthView.cs" />
+    <Compile Include="Views\LeadView.cs" />
+    <Compile Include="Views\NewsLetterView.cs" />
+    <Compile Include="Views\NoteView.cs" />
+    <Compile Include="Views\TaskLogView.cs" />
+    <Compile Include="Views\TemplateView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C79713A6-EC57-43BB-A557-53E2087035A5}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dto\Dto.csproj">
+      <Project>{1542838f-cf76-468e-8d8d-2e65a97c5a46}</Project>
+      <Name>Dto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NSBus.Dto\NSBus.Dto.csproj">
+      <Project>{49297D64-AC8F-4FE4-9227-BCF0DE583603}</Project>
+      <Name>NSBus.Dto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+  </PropertyGroup>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+</Project>

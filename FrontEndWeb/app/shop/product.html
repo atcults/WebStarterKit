@@ -1,0 +1,84 @@
+<section ng-controller="ProductCtrl">
+    <h1 app-color="gray">{{page.heading}}</h1>
+
+    <div class="container">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Get 10% CashBack on Credit Card Transactions.
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-md-3">
+                    <div class="configFilter">
+                        <h4>Refine Products</h4>
+                        <div class="filterBlock">
+                            <h5>Price</h5>
+                            Price Slider<br/>will be Placed <br/> Here
+                        </div>
+                        <div class="filterBlock">
+                            <h4>Brand</h4>
+                            <div class="row" ng-repeat="i in brList">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-md-1">
+                                        <input type="checkbox" name="{{i.brandId}}" value="{{i.brandId}}">
+                                    </div>
+                                    <div class="col-md-9">
+                                        {{i.brandName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<p ng-repeat="i in brList">
+                                {{i.brandName}}
+                                <input type="checkbox" name="{{i.brandId}}" value="{{i.brandId}}">
+                            </p>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="product-heading">
+                        <small>Mobiles</small>
+                        <div class="headFilter top-head-filter">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-default">New</button>
+                                <button type="button" class="btn btn-default">Popular</button>
+
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        Price
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li><a href="#">Low</a></li>
+                                        <li><a href="#">High</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="product-listing">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4" ng-repeat="p in productList">
+                                <div class="thumbnail product-item" title="{{p.description}}">
+                                    <a href="/" class="product-image">
+                                    <img src="styles/img/{{p.imageUrl}}.jpeg" alt="image">
+                                    <div class="caption">
+                                        <h5 class="text-center">{{p.name}}</h5>
+                                        <div class="text-center">
+                                            <span>Rs. {{p.offerPrice}}</span>
+                                            <span class="pr-price-strike">Rs. {{p.actualPrice}}</span>
+                                            <span style="color: #39b249;"> {{p.discount}} </span>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

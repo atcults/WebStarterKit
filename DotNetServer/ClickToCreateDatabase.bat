@@ -1,0 +1,1 @@
+psake createDatabase %* & pause

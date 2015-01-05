@@ -1,0 +1,176 @@
+{
+  "userID": "2",
+  "userName": "Name of user",
+  "userRole": "Profile role",
+  "moduleNames": [
+    "Home",
+    "Staff Station",
+    "Acquisition",
+    "Technical Processing",
+    "Serial Management",
+    "Administration"
+  ],
+  "modules": [
+    {
+      "name": "Home",
+      "menuItems": [
+        {
+          "Title": "About our company",
+          "linkText": "About Us",
+          "linkUrl": "/home/about",
+          "linkType": 0
+        },
+        {
+          "Title": "Facilities in our company",
+          "linkText": "Facilities",
+          "linkUrl": "/home/facilities",
+          "linkType": 0
+        },
+        {
+          "Title": "Reach us",
+          "linkText": "Contact Us",
+          "linkUrl": "/home/contact",
+          "linkType": 0
+        }
+      ]
+    },
+    {
+      "name": "Administration",
+      "menuItems": [
+        {
+          "Title": "List of patrons",
+          "linkText": "Patrons",
+          "linkUrl": "/administration/patrons",
+          "templateUrl": "/administration/patrons/index.html",
+          "dependencies": [
+            "controllers/patrons/index",
+            "directives/app-color"
+          ],
+          "linkType": 0,
+          "childViews": [
+            {
+              "Title": "Show Patron",
+              "linkUrl": "/administration/patrons/show/:patronId",
+              "templateUrl": "/administration/patrons/show.html",
+              "dependencies": [
+                "controllers/patrons/show",
+                "directives/app-color"
+              ]
+            },
+            {
+              "Title": "Edit Patron",
+              "linkUrl": "/administration/patrons/edit/:patronId",
+              "templateUrl": "/administration/patrons/show.html",
+              "dependencies": [
+                "controllers/patrons/show",
+                "directives/app-color"
+              ]
+            }
+          ]
+        },
+        {
+          "Title": "Circulation",
+          "linkText": "Circulation",
+          "linkType": 1,
+          "subMenuItems": [
+            {
+              "Title": "Checkout",
+              "linkText": "Checkout",
+              "linkUrl": "/staffstation/circulation/checkout",
+              "templateUrl": "/staffstation/circulation/checkout.html",
+              "dependencies": [
+                "controllers/staffstation/checkout",
+                "directives/app-color"
+              ],
+              "linkType": 0
+            },
+            {
+              "Title": "Check In",
+              "linkText": "Check In",
+              "linkUrl": "/staffstation/circulation/checkin",
+              "templateUrl": "/staffstation/circulation/checkin.html",
+              "dependencies": [
+                "controllers/staffstation/checkin",
+                "directives/app-color"
+              ],
+              "linkType": 0
+            },
+            {
+              "Title": "Item Reservation",
+              "linkText": "Item Reservation",
+              "linkUrl": "/staffstation/circulation/reservation",
+              "templateUrl": "/staffstation/circulation/reservation.html",
+              "dependencies": [
+                "controllers/staffstation/reservation",
+                "directives/app-color"
+              ],
+              "linkType": 0
+            },
+            {
+              "Title": "Loss of Item",
+              "linkText": "Loss of Item",
+              "linkUrl": "/staffstation/circulation/itemlost",
+              "templateUrl": "/staffstation/circulation/itemlost.html",
+              "dependencies": [
+                "controllers/staffstation/itemlost",
+                "directives/app-color"
+              ],
+              "linkType": 0
+            },
+            {
+              "Title": "Weed Out",
+              "linkText": "Weed Out",
+              "linkUrl": "/staffstation/circulation/weedout",
+              "templateUrl": "/staffstation/circulation/weedout.html",
+              "dependencies": [
+                "controllers/staffstation/weedout",
+                "directives/app-color"
+              ],
+              "linkType": 0
+            },
+            {
+              "Title": "Inter Library Loan",
+              "linkText": "Inter Library Loan",
+              "linkType": 1,
+              "childViews": [
+                {
+                  "Title": "Place ILL Request",
+                  "linkText": "Place ILL Request",
+                  "linkUrl": "/staffstation/circulation/ill/placerequest",
+                  "templateUrl": "/staffstation/circulation/ill/placerequest.html",
+                  "dependencies": [
+                    "controllers/staffstation/ill/placerequest",
+                    "directives/app-color"
+                  ],
+                  "linkType": 0
+                },
+                {
+                  "Title": "Refine ILL Request",
+                  "linkText": "Refine ILL Request",
+                  "linkUrl": "/staffstation/circulation/ill/refinerequest",
+                  "templateUrl": "/staffstation/circulation/ill/refinerequest.html",
+                  "dependencies": [
+                    "controllers/staffstation/ill/refinerequest",
+                    "directives/app-color"
+                  ],
+                  "linkType": 0
+                },
+                {
+                  "Title": "Receive Item",
+                  "linkText": "Receive Item",
+                  "linkUrl": "/staffstation/circulation/ill/reciveitem",
+                  "templateUrl": "/staffstation/circulation/ill/reciveitem.html",
+                  "dependencies": [
+                    "controllers/staffstation/ill/reciveitem",
+                    "directives/app-color"
+                  ],
+                  "linkType": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
