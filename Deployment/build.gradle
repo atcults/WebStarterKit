@@ -1,0 +1,25 @@
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.flywaydb:flyway-gradle-plugin:3.1"
+    }
+}
+
+apply plugin: 'flyway'
+
+/*
+task testSql(){
+    def ds = {
+        url = props['database.url']
+        driverClassName = props['database.driverClassName']
+        password = props['database.password']
+        username = props['database.username']
+    }
+
+    def sql = new groovy.sql.Sql(ds)
+    def r = sql.firstRow 'select 1 as val from dual'
+    println r.val
+}*/
