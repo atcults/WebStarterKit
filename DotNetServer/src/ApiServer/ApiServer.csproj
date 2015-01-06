@@ -198,9 +198,11 @@
     <Compile Include="ModelService\ITaskLogModelService.cs" />
     <Compile Include="ModelService\ITemplateModelService.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="ModelService\IAppUserModelService.cs" />
     <Compile Include="ModelService\Impl\AppUserModelService.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\Impl\AuthorizationServerProvider.cs" />
+    <Compile Include="Services\Impl\RefreshTokenProvider.cs" />
     <Compile Include="Services\IReportDataProvider.cs" />
     <Compile Include="Services\Impl\AuthenticationService.cs" />
     <Compile Include="Services\Impl\ReportDataProvider.cs" />

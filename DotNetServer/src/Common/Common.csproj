@@ -95,6 +95,7 @@
     <Compile Include="CommonRegistry.cs" />
     <Compile Include="EncodingHelper\HexEncoding.cs" />
     <Compile Include="EncodingHelper\UtfEncoding.cs" />
+    <Compile Include="Enumerations\ApplicationType.cs" />
     <Compile Include="Enumerations\BaseEnumeration.cs" />
     <Compile Include="Enumerations\ContactType.cs" />
     <Compile Include="Enumerations\Language.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Enumerations\HealthType.cs" />
     <Compile Include="Enumerations\HolidayType.cs" />
     <Compile Include="Enumerations\NotificationType.cs" />
-    <Compile Include="Enumerations\Role.cs" />
     <Compile Include="Enumerations\TaskStatus.cs" />
     <Compile Include="Enumerations\UserStatus.cs" />
     <Compile Include="Extensions\AttributeExtensions.cs" />

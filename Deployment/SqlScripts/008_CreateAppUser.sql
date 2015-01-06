@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[AppUser](
 	[PasswordHash] [varchar](256) NULL,
 	[PasswordSalt] [varchar](256) NULL,
 	[FailedAttemptCount] [integer] NULL,
-	[RoleValue] [char](2) NULL,
+	[ProfileId] [uniqueidentifier] NULL,
 	[UserStatusValue] [char](2) NULL,
 	[PasswordRetrievalToken] [varchar](256) NULL,
 	[LastLoginTime] [datetime] NULL,
@@ -43,7 +43,7 @@ AS
 	,AU.[PasswordHash]
 	,AU.[PasswordSalt]
 	,AU.[FailedAttemptCount]
-	,AU.[RoleValue]
+	,AU.[ProfileId]
 	,AU.[UserStatusValue]
 	,AU.[PasswordRetrievalToken]
 	,AU.[LastLoginTime]
@@ -78,7 +78,7 @@ CREATE PROC [dbo].[usp_AppUserInsert]
 	,@PasswordHash [varchar](256)  = NULL
 	,@PasswordSalt [varchar](256)  = NULL
 	,@FailedAttemptCount [integer]  = NULL
-	,@RoleValue [char](2)  = NULL
+	,@ProfileId [uniqueidentifier]  = NULL
 	,@UserStatusValue [char](2)  = NULL
 	,@PasswordRetrievalToken [varchar](256)  = NULL
 	,@LastLoginTime [datetime]  = NULL
@@ -91,8 +91,8 @@ AS
 
 	BEGIN TRAN
 
-	INSERT INTO [dbo].[AppUser] ([Id], [PasswordHash], [PasswordSalt], [FailedAttemptCount], [RoleValue], [UserStatusValue], [PasswordRetrievalToken], [LastLoginTime], [PasswordRetrievalTokenExpirationDate], [LastPasswordChangedDate])
-	SELECT @Id, @PasswordHash, @PasswordSalt, @FailedAttemptCount, @RoleValue, @UserStatusValue, @PasswordRetrievalToken, @LastLoginTime, @PasswordRetrievalTokenExpirationDate, @LastPasswordChangedDate
+	INSERT INTO [dbo].[AppUser] ([Id], [PasswordHash], [PasswordSalt], [FailedAttemptCount], [ProfileId], [UserStatusValue], [PasswordRetrievalToken], [LastLoginTime], [PasswordRetrievalTokenExpirationDate], [LastPasswordChangedDate])
+	SELECT @Id, @PasswordHash, @PasswordSalt, @FailedAttemptCount, @ProfileId, @UserStatusValue, @PasswordRetrievalToken, @LastLoginTime, @PasswordRetrievalTokenExpirationDate, @LastPasswordChangedDate
 
 	COMMIT;
 
@@ -101,7 +101,7 @@ AS
 	,AU.[PasswordHash]
 	,AU.[PasswordSalt]
 	,AU.[FailedAttemptCount]
-	,AU.[RoleValue]
+	,AU.[ProfileId]
 	,AU.[UserStatusValue]
 	,AU.[PasswordRetrievalToken]
 	,AU.[LastLoginTime]
@@ -123,7 +123,7 @@ CREATE PROC [dbo].[usp_AppUserUpdate]
 	,@PasswordHash [varchar](256)  = NULL
 	,@PasswordSalt [varchar](256)  = NULL
 	,@FailedAttemptCount [integer]  = NULL
-	,@RoleValue [char](2)  = NULL
+	,@ProfileId [uniqueidentifier]  = NULL
 	,@UserStatusValue [char](2)  = NULL
 	,@PasswordRetrievalToken [varchar](256)  = NULL
 	,@LastLoginTime [datetime]  = NULL
@@ -137,7 +137,7 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[AppUser]
-	SET [Id] = @Id, [PasswordHash] = @PasswordHash, [PasswordSalt] = @PasswordSalt, [FailedAttemptCount] = @FailedAttemptCount, [RoleValue] = @RoleValue, [UserStatusValue] = @UserStatusValue, [PasswordRetrievalToken] = @PasswordRetrievalToken, [LastLoginTime] = @LastLoginTime, [PasswordRetrievalTokenExpirationDate] = @PasswordRetrievalTokenExpirationDate, [LastPasswordChangedDate] = @LastPasswordChangedDate	WHERE [Id] = @Id
+	SET [Id] = @Id, [PasswordHash] = @PasswordHash, [PasswordSalt] = @PasswordSalt, [FailedAttemptCount] = @FailedAttemptCount, [ProfileId] = @ProfileId, [UserStatusValue] = @UserStatusValue, [PasswordRetrievalToken] = @PasswordRetrievalToken, [LastLoginTime] = @LastLoginTime, [PasswordRetrievalTokenExpirationDate] = @PasswordRetrievalTokenExpirationDate, [LastPasswordChangedDate] = @LastPasswordChangedDate	WHERE [Id] = @Id
 
 
 	COMMIT;
@@ -147,7 +147,7 @@ AS
 	,AU.[PasswordHash]
 	,AU.[PasswordSalt]
 	,AU.[FailedAttemptCount]
-	,AU.[RoleValue]
+	,AU.[ProfileId]
 	,AU.[UserStatusValue]
 	,AU.[PasswordRetrievalToken]
 	,AU.[LastLoginTime]

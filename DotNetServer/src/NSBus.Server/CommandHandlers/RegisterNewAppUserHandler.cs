@@ -46,7 +46,6 @@ namespace NSBus.Server.CommandHandlers
                 Id = contact.Id,
                 PasswordRetrievalToken = _cryptographer.ComputeHash(token),
                 PasswordRetrievalTokenExpirationDate = SystemTime.Now().AddDays(1),
-                Role = Role.Guest,
                 UserStatus = UserStatus.Disabled
             };
 

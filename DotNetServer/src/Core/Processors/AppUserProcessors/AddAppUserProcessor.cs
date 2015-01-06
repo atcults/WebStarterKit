@@ -40,7 +40,6 @@ namespace Core.Processors.AppUserProcessors
             var user = new AppUser
             {
                 Id = command.Id,
-                Role = command.Role,
                 UserStatus = command.UserStatus
             };
 
@@ -53,7 +52,6 @@ namespace Core.Processors.AppUserProcessors
                 Name = command.Name,
                 Mobile = command.Mobile,
                 Email = command.Email,
-                RoleName = command.Role.DisplayName,
                 UserStatusName = command.UserStatus.DisplayName,
                 Description = command.Description,
                 ImageData = command.ImageData

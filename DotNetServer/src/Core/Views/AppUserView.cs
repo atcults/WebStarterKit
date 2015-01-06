@@ -16,20 +16,7 @@ namespace Core.Views
 
         public int FailedAttemptCount { get; set; }
 
-        [JsonIgnore]
-        public Role Role { get; set; }
-
-        public string RoleValue
-        {
-            get { return Role == null ? "" : Role.Value; }
-            set { Role = Role.FromValue(value); }
-        }
-
-        public string RoleName
-        {
-            get { return Role == null ? "" : Role.DisplayName; }
-            set { Role = Role.FromDisplay(value); }
-        }
+        public Guid? ProfileId { get; set; }
 
         [JsonIgnore]
         public UserStatus UserStatus { get; set; }
@@ -50,10 +37,5 @@ namespace Core.Views
         public DateTime? LastLoginTime { get; set; }
         public DateTime? PasswordRetrievalTokenExpirationDate { get; set; }
         public DateTime? LastPasswordChangedDate { get; set; }
-
-        public bool IsAdmin()
-        {
-            return Equals(Role, Role.Owner);
-        }
     }
 }

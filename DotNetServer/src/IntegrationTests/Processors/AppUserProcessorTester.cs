@@ -20,8 +20,7 @@ namespace IntegrationTests.Processors
                 Name = "Name",
                 Mobile = "0000000000",
                 Email = "a@b.com",
-                UserStatus = UserStatus.Active,
-                Role = Role.Admin
+                UserStatus = UserStatus.Active
             };
 
             ProcessCommand(command, admin.Id);
@@ -42,7 +41,6 @@ namespace IntegrationTests.Processors
                 Name = "New Name",
                 Email = "mail@gmail.com",
                 Mobile = "0000000000",
-                Role = Role.Owner,
                 UserStatus = UserStatus.Active,
                 ImageData = ImageUtility.NoImageData,
             };

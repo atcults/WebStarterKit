@@ -37,6 +37,41 @@ DECLARE @CreatedBy UNIQUEIDENTIFIER = '8ee713a6-f7c8-4715-a52d-2dd2ec29d130'
 DECLARE @CreatedOn DATETIME = '2014-04-09 14:10:20.400'
 
 ------------------------------------------
+-- Template Table Data
+------------------------------------------
+
+DELETE From Template
+INSERT INTO [dbo].[Template]([Id],[Name],[MailBody],[SmsBody]) VALUES
+	(newid(),'User Registered','Dear {User:{Name}},<br/>Please click <a href="http://localhost:2266/auth?token={Token}">here</a> to set your new password. <br/><br/>Thank you,<br/>RoundTable India', 'Please use {Token} to reset your password.')
+	,(newid(),'Change Passowrd', 'Your password has been changed.', 'Your password has been changed.')
+	,(newid(),'Retrieve Password Request', 'Dear {User:{Name}},<br/>Please click <a href="http://localhost:2266/auth?token={Token}">here</a> to set your new password. <br/><br/>Thank you,<br/>RoundTable India', 'Please use {Token} to reset your password.')
+	,(newid(),'Retrieve Password Success','Your password has been reset successfully','Your password has been reset successfully')
+	,(newid(),'User Login Success','User logged in successfully','User logged in successfully')
+	,(newid(),'User Login Failed','User logged in failed', 'User logged in failed')
+	,(newid(),'Task Completed','Dear {User:{Name}},<br/>Your task {TaskView:{Name}} has been successfully completed.<br/>You can download generated file from <a href="http://localhost:2266/TaskLog/Show/{TaskView:{Id}}">here</a><br/><br/>Thank you,<br/>RoundTable India', 'Your task is completed. See task log for more details.')
+	,(newid(),'Task Failed','Dear {User:{Name}},<br/>Your task {TaskView:{Name}} has been failed.<br/>You can see more details from <a href="http://localhost:2266/TaskLog/Show/{TaskView:{Id}}">here</a><br/><br/>Thank you,<br/>RoundTable India', 'Your task is failed. See task log for more details.')
+	,(newid(),'Application Error','Application error occured. Please contact administrator.', 'Application error occured. Please contact administrator.')
+
+------------------------------------------
+-- Client Table Data
+------------------------------------------
+
+DELETE FROM [dbo].[AppClient]
+
+INSERT INTO [dbo].[AppClient] ([Id],[Name],[Secret],[ApplicationTypeValue],[RefreshTokenLifeTime],[AllowedOrigin],[IsActive])
+VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec290030','Web','Web','JS',20,'*',1),
+		('8ee713a6-f7c8-4715-a52d-2dd2ec290031','Test','App','NC',20,'*',1)
+ 
+------------------------------------------
+-- Profile Table Data
+------------------------------------------
+
+DELETE FROM [dbo].[AppProfile]
+
+INSERT INTO [dbo].[AppProfile] ([Id], [Name], [IsActive])
+VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec290130', 'Administrator', 1),('8ee713a6-f7c8-4715-a52d-2dd2ec290131', 'Guest', 1),('8ee713a6-f7c8-4715-a52d-2dd2ec290132', 'Service', 1)
+
+------------------------------------------
 -- Contact Table Data
 ------------------------------------------
 
@@ -54,24 +89,8 @@ INSERT INTO [dbo].[Contact]([Id], [Name], [GenderValue], [Mobile], [Email], [Con
 ------------------------------------------
 
 DELETE From AppUser
-INSERT INTO [dbo].[AppUser] ([Id],[PasswordHash],[PasswordSalt],[FailedAttemptCount],[RoleValue],[UserStatusValue])
-     VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec29d130', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'OW','A'),
-			('8ee713a6-f7c8-4715-a52d-2dd2ec29d131', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'GU','A'),
-			('8ee713a6-f7c8-4715-a52d-2dd2ec29d132', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'OW','A')
+INSERT INTO [dbo].[AppUser] ([Id],[PasswordHash],[PasswordSalt],[FailedAttemptCount],[ProfileId],[UserStatusValue])
+     VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec29d130', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'8ee713a6-f7c8-4715-a52d-2dd2ec290130','A'),
+			('8ee713a6-f7c8-4715-a52d-2dd2ec29d131', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'8ee713a6-f7c8-4715-a52d-2dd2ec290131','A'),
+			('8ee713a6-f7c8-4715-a52d-2dd2ec29d132', 'NSiN7TuYkSl5TASn1jQgq0wOrl32NlPkR05ie+ZPD5ZFGdBEp2BMLSuyIG15+0mTeV4TtlQAvhv4qPPlUTiGcg==','ssh4JedNTgf9qpY/mR5FtSNqK7eiQhfd3uIktRmaOpET6m55cUUl+6m3oZoKUi8dxChdDj/uuk//iEWZV2aGnQ==',0,'8ee713a6-f7c8-4715-a52d-2dd2ec290132','A')
 
-   
-------------------------------------------
--- Template Table Data
-------------------------------------------
-
-DELETE From Template
-INSERT INTO [dbo].[Template]([Id],[Name],[MailBody],[SmsBody]) VALUES
-	(newid(),'User Registered','Dear {User:{Name}},<br/>Please click <a href="http://localhost:2266/auth?token={Token}">here</a> to set your new password. <br/><br/>Thank you,<br/>RoundTable India', 'Please use {Token} to reset your password.')
-	,(newid(),'Change Passowrd', 'Your password has been changed.', 'Your password has been changed.')
-	,(newid(),'Retrieve Password Request', 'Dear {User:{Name}},<br/>Please click <a href="http://localhost:2266/auth?token={Token}">here</a> to set your new password. <br/><br/>Thank you,<br/>RoundTable India', 'Please use {Token} to reset your password.')
-	,(newid(),'Retrieve Password Success','Your password has been reset successfully','Your password has been reset successfully')
-	,(newid(),'User Login Success','User logged in successfully','User logged in successfully')
-	,(newid(),'User Login Failed','User logged in failed', 'User logged in failed')
-	,(newid(),'Task Completed','Dear {User:{Name}},<br/>Your task {TaskView:{Name}} has been successfully completed.<br/>You can download generated file from <a href="http://localhost:2266/TaskLog/Show/{TaskView:{Id}}">here</a><br/><br/>Thank you,<br/>RoundTable India', 'Your task is completed. See task log for more details.')
-	,(newid(),'Task Failed','Dear {User:{Name}},<br/>Your task {TaskView:{Name}} has been failed.<br/>You can see more details from <a href="http://localhost:2266/TaskLog/Show/{TaskView:{Id}}">here</a><br/><br/>Thank you,<br/>RoundTable India', 'Your task is failed. See task log for more details.')
-	,(newid(),'Application Error','Application error occured. Please contact administrator.', 'Application error occured. Please contact administrator.')

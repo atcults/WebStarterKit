@@ -83,6 +83,12 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Commands\AppClientCommands\AddAppClient.cs" />
+    <Compile Include="Commands\AppClientCommands\DeleteAppClient.cs" />
+    <Compile Include="Commands\AppClientCommands\UpdateAppClient.cs" />
+    <Compile Include="Commands\AppProfileCommands\AddAppProfile.cs" />
+    <Compile Include="Commands\AppProfileCommands\DeleteAppProfile.cs" />
+    <Compile Include="Commands\AppProfileCommands\UpdateAppProfile.cs" />
     <Compile Include="Commands\AppUserCommands\AddAppUser.cs" />
     <Compile Include="Commands\AppUserCommands\ChangePassword.cs" />
     <Compile Include="Commands\AppUserCommands\DeleteAppUser.cs" />
@@ -115,9 +121,18 @@
     <Compile Include="Commands\TemplateCommands\AddTemplate.cs" />
     <Compile Include="Commands\TemplateCommands\DeleteTemplate.cs" />
     <Compile Include="Commands\TemplateCommands\UpdateTemplate.cs" />
+    <Compile Include="Domain\Model\AppClient.cs" />
+    <Compile Include="Domain\Model\AppProfile.cs" />
     <Compile Include="Domain\Model\AssignedContact.cs" />
     <Compile Include="Domain\Model\NewsLetter.cs" />
     <Compile Include="Domain\Model\TaskLog.cs" />
+    <Compile Include="Domain\Model\TokenStore.cs" />
+    <Compile Include="Processors\AppClientProcessors\AddAppClientProcessor.cs" />
+    <Compile Include="Processors\AppClientProcessors\DeleteAppClientProcessor.cs" />
+    <Compile Include="Processors\AppClientProcessors\UpdateAppClientProcessor.cs" />
+    <Compile Include="Processors\AppProfileProcessors\AddAppProfileProcessor.cs" />
+    <Compile Include="Processors\AppProfileProcessors\DeleteAppProfileProcessor.cs" />
+    <Compile Include="Processors\AppProfileProcessors\UpdateAppProfileProcessor.cs" />
     <Compile Include="ViewOnly\IHealthViewRepository.cs" />
     <Compile Include="ViewOnly\Impl\HealthViewRepository.cs" />
     <Compile Include="Processors\AssignedContactProcessors\AddAssignedContactProcessor.cs" />
@@ -211,6 +226,8 @@
     <Compile Include="ViewOnly\Attribute\ViewNameAttribute.cs" />
     <Compile Include="ViewOnly\Impl\ViewRepository.cs" />
     <Compile Include="ViewOnly\ViewRepositoryHelper.cs" />
+    <Compile Include="Views\AppClientView.cs" />
+    <Compile Include="Views\AppProfileView.cs" />
     <Compile Include="Views\AppUserView.cs" />
     <Compile Include="Views\AssignedContactView.cs" />
     <Compile Include="Views\AttachmentView.cs" />
@@ -222,6 +239,7 @@
     <Compile Include="Views\NoteView.cs" />
     <Compile Include="Views\TaskLogView.cs" />
     <Compile Include="Views\TemplateView.cs" />
+    <Compile Include="Views\TokenStoreView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

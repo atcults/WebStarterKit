@@ -42,7 +42,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SmartFormat">
-      <HintPath>..\..\ExtLib\SmartFormat\SmartFormat.dll</HintPath>
+      <HintPath>..\..\tools\SmartFormat\SmartFormat.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -15,7 +15,7 @@ namespace Core.Domain.Model
         public string PasswordSalt { get; set; }
 
         public int FailedAttemptCount { get; set; }
-        public Role Role { get; set; }
+        public Guid? ProfileId { get; set; }
         public UserStatus UserStatus { get; set; }
 
         public string PasswordRetrievalToken { get; set; }
@@ -31,7 +31,7 @@ namespace Core.Domain.Model
             PasswordHash = dataReader.ReadNullSafeString("PasswordHash");
             PasswordSalt = dataReader.ReadNullSafeString("PasswordSalt");
             FailedAttemptCount = dataReader.ReadNullSafeInt("FailedAttemptCount").GetValueOrDefault();
-            Role = Role.FromValue(dataReader.ReadNullSafeString("RoleValue"));
+            ProfileId = dataReader.ReadNullSafeUid("ProfileId");
             UserStatus = UserStatus.FromValue(dataReader.ReadNullSafeString("UserStatusValue"));
             PasswordRetrievalToken = dataReader.ReadNullSafeString("PasswordRetrievalToken");
             LastLoginTime = dataReader.ReadNullSafeDateTime("LastLoginTime");
@@ -45,7 +45,7 @@ namespace Core.Domain.Model
             cmd.Parameters.Add("@PasswordHash", SqlDbType.VarChar).Value = (object) PasswordHash ?? DBNull.Value;
             cmd.Parameters.Add("@PasswordSalt", SqlDbType.VarChar).Value = (object) PasswordSalt ?? DBNull.Value;
             cmd.Parameters.Add("@FailedAttemptCount", SqlDbType.Int).Value = FailedAttemptCount;
-            cmd.Parameters.Add("@RoleValue", SqlDbType.Char, 2).Value = BaseEnumeration.GetDbNullSafe(Role) ?? DBNull.Value;
+            cmd.Parameters.Add("@ProfileId", SqlDbType.UniqueIdentifier).Value = ProfileId.HasValue ? (object) ProfileId.Value : DBNull.Value;
             cmd.Parameters.Add("@UserStatusValue", SqlDbType.Char, 2).Value = BaseEnumeration.GetDbNullSafe(UserStatus) ?? DBNull.Value;
             cmd.Parameters.Add("@PasswordRetrievalToken", SqlDbType.VarChar).Value = (object) PasswordRetrievalToken ?? DBNull.Value;
             cmd.Parameters.Add("@LastLoginTime", SqlDbType.DateTime).Value = (object) LastLoginTime ?? DBNull.Value;

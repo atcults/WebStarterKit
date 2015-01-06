@@ -27,11 +27,9 @@ namespace WebApp.Initialization.Automapper
             //AppUser
             CreateMap<AddAppUserForm, AddAppUser>()
                 .ForMember(x => x.Id, o => o.MapFrom(x => GuidComb.New()))
-                .ForMember(x => x.Role, o => o.MapFrom(x => Role.FromValue(x.RoleValue)))
                 .ForMember(x => x.UserStatus, o => o.MapFrom(x => UserStatus.FromValue(x.UserStatusValue)));
 
             CreateMap<UpdateAppUserForm, UpdateAppUser>()
-                .ForMember(x => x.Role, o => o.MapFrom(x => Role.FromValue(x.RoleValue)))
                 .ForMember(x => x.UserStatus, o => o.MapFrom(x => UserStatus.FromValue(x.UserStatusValue)));
             
             //Configuration

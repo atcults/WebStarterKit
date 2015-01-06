@@ -42,7 +42,6 @@ namespace Core.Processors.AppUserProcessors
             var user = _userRepository.GetById(command.Id);
             if (user == null) throw new DomainProcessException("No user exist");
             
-            user.Role = command.Role;
             user.UserStatus = command.UserStatus;
 
             _userRepository.Update(user);

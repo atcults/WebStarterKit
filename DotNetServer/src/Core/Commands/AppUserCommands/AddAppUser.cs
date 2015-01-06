@@ -11,7 +11,7 @@ namespace Core.Commands.AppUserCommands
      
         public string Email { get; set; }
         
-        public Role Role { get; set; }
+        public Guid? ProfileId { get; set; }
         
         public UserStatus UserStatus { get; set; }
 
@@ -30,8 +30,8 @@ namespace Core.Commands.AppUserCommands
             if (!Formatter.EmailId(Email))
                 validationResult.AddError("Email", " is not valid.");
             
-            if (Role == null)
-                validationResult.AddError("Role", " should be selected.");
+            if (ProfileId == null)
+                validationResult.AddError("Profile", " should be selected.");
 
             if (UserStatus == null)
                 validationResult.AddError("User Status", " should be selected.");

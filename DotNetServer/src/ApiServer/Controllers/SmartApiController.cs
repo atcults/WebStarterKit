@@ -7,7 +7,6 @@ using Common.Base;
 using Common.Extensions;
 using Core.Commands;
 using Core.Domain;
-using Common.Enumerations;
 using Core.ReadWrite;
 using Core.Views;
 using Dto.ApiResponses;
@@ -25,19 +24,6 @@ namespace WebApp.Controllers
         {
             UserSession = userSession;
             MappingEngine = mappingEngine;
-        }
-
-        public void EnsureCurrentUserHas(object form)
-        {
-            if (!CurrentUserHas(form))
-                throw new HttpResponseException(HttpStatusCode.Unauthorized);
-        }
-
-        public bool CurrentUserHas(object permission)
-        {
-            var currentUser = GetCurrentUser();
-
-            return !currentUser.Role.Equals(Role.Guest);
         }
 
         protected AppUserView GetCurrentUser()

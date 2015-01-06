@@ -27,7 +27,7 @@ namespace WebApp.Initialization
             
             RegisterWebApi();
 
-          //  ConfigureOAuth(app);
+            ConfigureOAuth(app);
             
           //  KeepAlive.Start();
         }

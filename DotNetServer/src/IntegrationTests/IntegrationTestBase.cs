@@ -185,8 +185,7 @@ namespace IntegrationTests
                 Id = contact.Id,
                 PasswordHash = cryptographer.ComputeHash(mobile + salt),
                 PasswordSalt = salt,
-                UserStatus = UserStatus.Active,
-                Role = Role.Admin
+                UserStatus = UserStatus.Active
             };
 
             Persist(contact, user);
