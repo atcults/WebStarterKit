@@ -18,7 +18,7 @@ namespace IntegrationTests.ViewModel
 
             var staticData = new Dictionary<string, object>
             {
-                {"Token", "123"},
+                {"TokenHash", "123"},
                 {"ContactId", member.Id}
             };
 
@@ -54,8 +54,8 @@ namespace IntegrationTests.ViewModel
             }
             
             var specificCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-us");
-            var mailBody = Smart.Format(specificCulture, "Dear {User:{Name}}, {ContactView:{Mobile}}, Your password token is {Token}.", data);
-            var anotherBody = Smart.Format(specificCulture, "Dear {User.Name}, {ContactView.Mobile}, Your password token is {Token}.", data);
+            var mailBody = Smart.Format(specificCulture, "Dear {User:{Name}}, {ContactView:{Mobile}}, Your password token is {TokenHash}.", data);
+            var anotherBody = Smart.Format(specificCulture, "Dear {User.Name}, {ContactView.Mobile}, Your password token is {TokenHash}.", data);
             Assert.AreEqual(mailBody, "Dear Name, 9898989898, Your password token is 123.");
         }
     }

@@ -8,8 +8,9 @@ namespace Core.Views
 	public class TokenStoreView : View
 	{
 		public string Name { get; set; }
+        public string TokenHash { get; set; }
 		public Guid? ClientId { get; set; }
-		public string ProtectedTicket { get; set; }
+		public string TicketHash { get; set; }
 		public DateTime? IssuedUtc { get; set; }
 		public DateTime? ExpiresUtc { get; set; }
 	}

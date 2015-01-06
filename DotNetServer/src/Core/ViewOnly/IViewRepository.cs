@@ -5,14 +5,14 @@ using Dto.ApiRequests;
 
 namespace Core.ViewOnly
 {
-    public interface IViewRepository<TViewModel>
+    public interface IViewRepository<T> where T : IView
     {
         //Prevent passing all data.
-        IEnumerable<TViewModel> FetchAll();
-        IEnumerable<TViewModel> Fetch(Sql sql);
-        TViewModel GetById(Guid id);
-        TViewModel GetByKey(string keyProperty, object keyValue);
-        TViewModel[] GetAllFor(string keyProperty, object keyValue);
-        Page<TViewModel> SearchBySpecification(SimpleSearch specification);
+        IEnumerable<T> FetchAll();
+        IEnumerable<T> Fetch(Sql sql);
+        T GetById(Guid id);
+        T GetByKey(string keyProperty, object keyValue);
+        T[] GetAllFor(string keyProperty, object keyValue);
+        Page<T> SearchBySpecification(SimpleSearch specification);
     }
 }

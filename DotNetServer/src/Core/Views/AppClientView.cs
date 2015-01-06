@@ -18,7 +18,7 @@ namespace Core.Views
 
 		public int? RefreshTokenLifeTime { get; set; }
 		public string AllowedOrigin { get; set; }
-		public bool? IsActive { get; set; }
+		public bool IsActive { get; set; }
 
 	}
 }

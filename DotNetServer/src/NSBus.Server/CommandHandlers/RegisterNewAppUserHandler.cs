@@ -56,7 +56,7 @@ namespace NSBus.Server.CommandHandlers
             {
                 m.UserId = contact.Id;
                 m.NotificationTypeValue = NotificationType.UserRegistered.Value;
-                m.StaticData = new Dictionary<string, object> { { "Token", token } };
+                m.StaticData = new Dictionary<string, object> { { "TokenHash", token } };
             });
         }
 

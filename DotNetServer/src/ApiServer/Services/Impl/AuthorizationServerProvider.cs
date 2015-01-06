@@ -2,9 +2,10 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Common.Enumerations;
-using Common.Net.Core;
-using Core.Domain.Model;
+using Common.Helpers;
+using Common.Service;
 using Core.ViewOnly;
+using Core.Views;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
@@ -12,13 +13,17 @@ namespace WebApp.Services.Impl
 {
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        private readonly IViewRepository<AppUser> _appUserViewRepository;
+        private readonly IViewRepository<AppClientView> _appClientViewRepository; 
+        private readonly IViewRepository<AppUserView> _appUserViewRepository;
         private readonly IAuthenticationService _authenticationService;
+        private readonly ICryptographer _cryptographer;
 
-        public AuthorizationServerProvider(IViewRepository<AppUser> appUserViewRepository, IAuthenticationService authenticationService)
+        public AuthorizationServerProvider(IViewRepository<AppUserView> appUserViewRepository, IAuthenticationService authenticationService, ICryptographer cryptographer, IViewRepository<AppClientView> appClientViewRepository)
         {
             _appUserViewRepository = appUserViewRepository;
             _authenticationService = authenticationService;
+            _cryptographer = cryptographer;
+            _appClientViewRepository = appClientViewRepository;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -33,16 +38,12 @@ namespace WebApp.Services.Impl
 
             if (context.ClientId == null)
             {
-                // Remove the comments from the below line context.SetError, and invalidate context 
-                // if you want to force sending clientId/secrects once obtain access tokens. 
                 context.Validated();
-
-                // context.SetError("invalid_clientId", "ClientId should be sent.");
-
+                // context.SetError("invalid_clientId", "ClientId should be sent."); // To restrict using clientId use this line.
                 return Task.FromResult<object>(null);
             }
 
-            var client = authRepository.FindClient(context.ClientId);
+            var client = _appClientViewRepository.GetByKey(Property.Of<AppClientView>(x=>x.Name), context.ClientId);
 
             if (client == null)
             {
@@ -51,7 +52,7 @@ namespace WebApp.Services.Impl
                 return Task.FromResult<object>(null);
             }
 
-            if (client.ApplicationType == ApplicationType.NativeConfidential)
+            if (client.ApplicationType.Equals(ApplicationType.NativeConfidential))
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
@@ -59,7 +60,8 @@ namespace WebApp.Services.Impl
 
                     return Task.FromResult<object>(null);
                 }
-                if (client.Secret != Helper.GetHash(clientSecret))
+
+                if (client.Secret != _cryptographer.ComputeHash(clientSecret))
                 {
                     context.SetError("invalid_clientId", "Client secret is invalid.");
 
@@ -67,15 +69,15 @@ namespace WebApp.Services.Impl
                 }
             }
 
-            if (!client.Active)
+            if (!client.IsActive)
             {
                 context.SetError("invalid_clientId", "Client is inactive.");
 
                 return Task.FromResult<object>(null);
             }
 
-            context.OwinContext.Set<string>("as:clientAllowedOrigin", client.AllowedOrigin);
-            context.OwinContext.Set<string>("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
+            context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
+            context.OwinContext.Set("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
 
             context.Validated();
 
@@ -84,15 +86,19 @@ namespace WebApp.Services.Impl
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
-
-            if (allowedOrigin == null) allowedOrigin = "*";
+            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var user = await authRepository.FindUser(context.UserName, context.Password);
+            var user =  _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x=>x.Name), context.UserName);
 
             if (user == null)
+            {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
+            }
+
+            if (_authenticationService.PasswordMatches(user, context.Password))
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
@@ -102,17 +108,9 @@ namespace WebApp.Services.Impl
 
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
+            identity.AddClaim(new Claim("role", user.ProfileName));
 
-            var props = new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    { 
-                        "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
-                    },
-                    { 
-                        "userName", context.UserName
-                    }
-                });
+            var props = CreateProperties(context.UserName, context.ClientId);
 
             var ticket = new AuthenticationTicket(identity, props);
 
@@ -151,6 +149,15 @@ namespace WebApp.Services.Impl
             }
 
             return Task.FromResult<object>(null);
+        }
+
+        public static AuthenticationProperties CreateProperties(string userName, string clientId = null)
+        {
+            return new AuthenticationProperties(new Dictionary<string, string>
+                {
+                    { "as:client_id", clientId ?? string.Empty },
+                    { "userName", userName }
+                });
         }
 
     }

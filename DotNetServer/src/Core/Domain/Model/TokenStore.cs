@@ -10,8 +10,9 @@ namespace Core.Domain.Model
 	public class TokenStore : Entity
 	{
 		public string Name { get; set; }
+        public string TokenHash { get; set; }
 		public Guid? ClientId { get; set; }
-		public string ProtectedTicket { get; set; }
+		public string TicketHash { get; set; }
 		public DateTime? IssuedUtc { get; set; }
 		public DateTime? ExpiresUtc { get; set; }
 
@@ -20,8 +21,9 @@ namespace Core.Domain.Model
 			base.From(dataReader);
 			Id = dataReader.ReadUid("Id");
 			Name = dataReader.ReadNullSafeString("Name");
+		    TokenHash = dataReader.ReadNullSafeString("TokenHash");
 			ClientId = dataReader.ReadUid("ClientId");
-			ProtectedTicket = dataReader.ReadNullSafeString("ProtectedTicket");
+			TicketHash = dataReader.ReadNullSafeString("TicketHash");
 			IssuedUtc = dataReader.ReadNullSafeDateTime("IssuedUtc");
             ExpiresUtc = dataReader.ReadNullSafeDateTime("ExpiresUtc");
 		}
@@ -30,8 +32,9 @@ namespace Core.Domain.Model
 		{
 			base.To(cmd);
 			cmd.Parameters.Add("@Name", SqlDbType.VarChar, 256).Value = (object)Name ?? DBNull.Value;
+			cmd.Parameters.Add("@TokenHash", SqlDbType.VarChar, 256).Value = (object)TokenHash ?? DBNull.Value;
 			cmd.Parameters.Add("@ClientId", SqlDbType.UniqueIdentifier).Value = (object)ClientId ?? DBNull.Value;
-			cmd.Parameters.Add("@ProtectedTicket", SqlDbType.VarChar, 256).Value = (object)ProtectedTicket ?? DBNull.Value;
+			cmd.Parameters.Add("@TicketHash", SqlDbType.VarChar, 256).Value = (object)TicketHash ?? DBNull.Value;
 			cmd.Parameters.Add("@IssuedUtc", SqlDbType.DateTime).Value = (object)IssuedUtc ?? DBNull.Value;
 			cmd.Parameters.Add("@ExpiresUtc", SqlDbType.DateTime).Value = (object)ExpiresUtc ?? DBNull.Value;
 		}

@@ -34,7 +34,7 @@ namespace NSBus.Server.CommandHandlers
             {
                 m.UserId = member.Id;
                 m.NotificationTypeValue = NotificationType.ResetPasswordRequest.Value;
-                m.StaticData = new Dictionary<string, object>{{"Token", token}};
+                m.StaticData = new Dictionary<string, object>{{"TokenHash", token}};
             });
         }
     }

@@ -64,7 +64,7 @@ namespace WebApp.Initialization
                 RefreshTokenProvider = ClientEndPoint.Container.GetInstance<IAuthenticationTokenProvider>()
             };
 
-            // Token Generation
+            // TokenHash Generation
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
 
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());

@@ -65,14 +65,14 @@ namespace WebApp.Controllers
             if (form.Token != null || form.NewPassword != null || form.ConfirmPassword != null)
             {
                 if (!form.Token.IsNotEmpty())
-                    response.AddError("Token", "is empty.");
+                    response.AddError("TokenHash", "is empty.");
                 else if (form.Token.IsNotEmpty())
                 {
                     var encryptToken = _cryptographer.ComputeHash(form.Token);
                     var member = _appUserViewRepository.GetByKey(Property.Of<AppUser>(x => x.PasswordRetrievalToken), encryptToken);
 
                     if (member == null)
-                        response.AddError("Token", "is not valid");
+                        response.AddError("TokenHash", "is not valid");
                     else
                     {
                         if (!form.NewPassword.IsNotEmpty() || !form.ConfirmPassword.IsNotEmpty())
@@ -103,7 +103,7 @@ namespace WebApp.Controllers
                     }
                 }
             }
-            response.AddError("Token or NewPassword or ConfirmPassword", "is Empty or Invalid");
+            response.AddError("TokenHash or NewPassword or ConfirmPassword", "is Empty or Invalid");
             return Content(response);
         }
     }

@@ -44,6 +44,7 @@ AS
 	,AU.[PasswordSalt]
 	,AU.[FailedAttemptCount]
 	,AU.[ProfileId]
+	,AP.[Name] as ProfileName
 	,AU.[UserStatusValue]
 	,AU.[PasswordRetrievalToken]
 	,AU.[LastLoginTime]
@@ -62,6 +63,7 @@ AS
 	LEFT JOIN Contact C ON C.[Id] = AU.[Id]
 	LEFT JOIN Contact CC ON C.[CreatedBy] = CC.[Id]
 	LEFT JOIN Contact MC ON C.[ModifiedBy] = MC.[Id]
+	LEFT JOIN AppProfile AP ON AP.[Id] = AU.[ProfileId]
 
 GO
 SET ANSI_PADDING OFF 

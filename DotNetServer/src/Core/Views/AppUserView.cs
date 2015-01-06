@@ -17,6 +17,7 @@ namespace Core.Views
         public int FailedAttemptCount { get; set; }
 
         public Guid? ProfileId { get; set; }
+        public string ProfileName { get; set; }
 
         [JsonIgnore]
         public UserStatus UserStatus { get; set; }

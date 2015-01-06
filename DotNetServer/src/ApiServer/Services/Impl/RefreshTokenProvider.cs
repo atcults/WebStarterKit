@@ -1,19 +1,27 @@
 using System;
 using System.Threading.Tasks;
+using Common.Helpers;
 using Common.Net.Core;
+using Common.Service;
 using Core.ViewOnly;
 using Core.Views;
 using Microsoft.Owin.Security.Infrastructure;
+using NSBus.Dto.Commands;
+using NServiceBus;
 
 namespace WebApp.Services.Impl
 {
     public class RefreshTokenProvider : IAuthenticationTokenProvider
     {
         private readonly IViewRepository<AppClientView> _clientViewRepository;
-        private readonly IViewRepository<TokenStoreView> _tokenStoreViewRepository; 
+        private readonly IViewRepository<TokenStoreView> _tokenStoreViewRepository;
+        private readonly ICryptographer _cryptographer;
+        private readonly IBus _bus;
 
-        public RefreshTokenProvider(IViewRepository<TokenStoreView> tokenStoreViewRepository, IViewRepository<AppClientView> clientViewRepository)
+        public RefreshTokenProvider(IViewRepository<TokenStoreView> tokenStoreViewRepository, IViewRepository<AppClientView> clientViewRepository, IBus bus, ICryptographer cryptographer)
         {
+            _bus = bus;
+            _cryptographer = cryptographer;
             _tokenStoreViewRepository = tokenStoreViewRepository;
             _clientViewRepository = clientViewRepository;
         }
@@ -31,26 +39,23 @@ namespace WebApp.Services.Impl
 
             var refreshTokenLifeTime = context.OwinContext.Get<string>("as:clientRefreshTokenLifeTime");
 
-            var token = new RefreshToken()
+            var now = DateTime.UtcNow;
+            var till = DateTime.UtcNow.AddMinutes(Convert.ToDouble(refreshTokenLifeTime));
+
+            context.Ticket.Properties.IssuedUtc = now;
+            context.Ticket.Properties.ExpiresUtc = till;
+
+            context.SetToken(refreshTokenId);
+
+            _bus.Send<AddRefreshTokenCommand>(m =>
             {
-                Id = Helper.GetHash(refreshTokenId),
-                ClientId = clientid,
-                Subject = context.Ticket.Identity.Name,
-                IssuedUtc = DateTime.UtcNow,
-                ExpiresUtc = DateTime.UtcNow.AddMinutes(Convert.ToDouble(refreshTokenLifeTime))
-            };
-
-            context.Ticket.Properties.IssuedUtc = token.IssuedUtc;
-            context.Ticket.Properties.ExpiresUtc = token.ExpiresUtc;
-
-            token.ProtectedTicket = context.SerializeTicket();
-
-            var result = await authRepository.AddRefreshToken(token);
-
-            if (result)
-            {
-                context.SetToken(refreshTokenId);
-            }
+                m.ClientId = clientid;
+                m.Name = context.Ticket.Identity.Name;
+                m.TokenHash = _cryptographer.ComputeHash(refreshTokenId);
+                m.TicketHash = context.SerializeTicket(); 
+                m.IssuedUtc = now;
+                m.ExpiresUtc = till;
+            });
         }
 
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
@@ -59,16 +64,16 @@ namespace WebApp.Services.Impl
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var hashedTokenId = Helper.GetHash(context.Token);
+            var hashedTokenId = _cryptographer.ComputeHash(context.Token);
 
-            var refreshToken = await authRepository.FindRefreshToken(hashedTokenId);
+            var refreshToken = _tokenStoreViewRepository.GetByKey(Property.Of<TokenStoreView>(x => x.TokenHash), hashedTokenId);
 
             if (refreshToken != null)
             {
                 //Get protectedTicket from refreshToken class
-                context.DeserializeTicket(refreshToken.ProtectedTicket);
-
-                var result = await authRepository.RemoveRefreshToken(hashedTokenId);
+                context.DeserializeTicket(refreshToken.TicketHash);
+                //TODO: Remove refreshtoken
+                
             }
         }
 

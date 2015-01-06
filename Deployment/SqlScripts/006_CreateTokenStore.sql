@@ -13,8 +13,9 @@ GO
 CREATE TABLE [dbo].[TokenStore](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Name] [varchar](256) NULL,
+	[TokenHash] [varchar](256) NULL,
 	[ClientId] [uniqueidentifier] NULL,
-	[ProtectedTicket] [varchar](256) NULL,
+	[TicketHash] [varchar](256) NULL,
 	[IssuedUtc] [datetime] NULL,
 	[ExpiresUtc] [datetime] NULL,
 CONSTRAINT [PK_TokenStore] PRIMARY KEY CLUSTERED 
@@ -34,8 +35,9 @@ AS
 	SELECT
 	TS.[Id]
 	,TS.[Name]
+	,TS.[TokenHash]
 	,TS.[ClientId]
-	,TS.[ProtectedTicket]
+	,TS.[TicketHash]
 	,TS.[IssuedUtc]
 	,TS.[ExpiresUtc]
 	From TokenStore TS
@@ -53,8 +55,9 @@ GO
 CREATE PROC [dbo].[usp_TokenStoreInsert]
 	@Id  [uniqueidentifier]
 	,@Name [varchar](256)  = NULL
+	,@TokenHash [varchar](256)  = NULL
 	,@ClientId [uniqueidentifier]  = NULL
-	,@ProtectedTicket [varchar](256)  = NULL
+	,@TicketHash [varchar](256)  = NULL
 	,@IssuedUtc [datetime]  = NULL
 	,@ExpiresUtc [datetime]  = NULL
 
@@ -64,16 +67,17 @@ AS
 
 	BEGIN TRAN
 
-	INSERT INTO [dbo].[TokenStore] ([Id], [Name], [ClientId], [ProtectedTicket], [IssuedUtc], [ExpiresUtc])
-	SELECT @Id,@Name, @ClientId, @ProtectedTicket, @IssuedUtc, @ExpiresUtc
+	INSERT INTO [dbo].[TokenStore] ([Id], [Name], [TokenHash], [ClientId], [TicketHash], [IssuedUtc], [ExpiresUtc])
+	SELECT @Id,@Name, @TokenHash, @ClientId, @TicketHash, @IssuedUtc, @ExpiresUtc
 
 	COMMIT;
 
 	SELECT
 	TS.[Id]
 	,TS.[Name]
+	,TS.[TokenHash]
 	,TS.[ClientId]
-	,TS.[ProtectedTicket]
+	,TS.[TicketHash]
 	,TS.[IssuedUtc]
 	,TS.[ExpiresUtc]
 	From TokenStore TS
@@ -90,8 +94,9 @@ GO
 CREATE PROC [dbo].[usp_TokenStoreUpdate]
 	@Id  [uniqueidentifier]
 	,@Name [varchar](256)  = NULL
+	,@TokenHash [varchar](256)  = NULL
 	,@ClientId [uniqueidentifier]  = NULL
-	,@ProtectedTicket [varchar](256)  = NULL
+	,@TicketHash [varchar](256)  = NULL
 	,@IssuedUtc [datetime]  = NULL
 	,@ExpiresUtc [datetime]  = NULL
 
@@ -102,7 +107,7 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[TokenStore]
-	SET [Id] = @Id, [Name] = @Name, [ClientId] = @ClientId, [ProtectedTicket] = @ProtectedTicket, [IssuedUtc] = @IssuedUtc, [ExpiresUtc] = @ExpiresUtc	WHERE [Id] = @Id
+	SET [Id] = @Id, [Name] = @Name, [TokenHash] = @TokenHash, [ClientId] = @ClientId, [TicketHash] = @TicketHash, [IssuedUtc] = @IssuedUtc, [ExpiresUtc] = @ExpiresUtc	WHERE [Id] = @Id
 
 
 	COMMIT;
@@ -110,8 +115,9 @@ AS
 	SELECT
 	TS.[Id]
 	,TS.[Name]
+	,TS.[TokenHash]
 	,TS.[ClientId]
-	,TS.[ProtectedTicket]
+	,TS.[TicketHash]
 	,TS.[IssuedUtc]
 	,TS.[ExpiresUtc]
 	From TokenStore TS
