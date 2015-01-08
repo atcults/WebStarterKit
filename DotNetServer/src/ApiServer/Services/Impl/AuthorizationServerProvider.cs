@@ -8,22 +8,31 @@ using Core.ViewOnly;
 using Core.Views;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using NSBus.Dto.Commands;
+using NServiceBus;
 
 namespace WebApp.Services.Impl
 {
-    public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
+    public class AuthorizationServerProvider : OAuthAuthorizationServerProvider, IAuthorizationServerProvider
     {
-        private readonly IViewRepository<AppClientView> _appClientViewRepository; 
-        private readonly IViewRepository<AppUserView> _appUserViewRepository;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IViewRepository<AppClientView> _appClientViewRepository;
         private readonly ICryptographer _cryptographer;
+        private readonly IViewRepository<AppUserView> _appUserViewRepository;
+        private readonly IBus _bus;
 
-        public AuthorizationServerProvider(IViewRepository<AppUserView> appUserViewRepository, IAuthenticationService authenticationService, ICryptographer cryptographer, IViewRepository<AppClientView> appClientViewRepository)
+        private const int PasswordValidPeriod = 6; // Months
+        private const string UserDoesNotExistMssg = "User does not exist.";
+        private const string LockedAccountMssg = "Your account has been locked due to too many invalid log-on attempts. Please reset your password by clicking \"Forgot Password?\"";
+        private const string ExpiredPasswordMssg = "Your current password has expired. Please reset your password by clicking \"Forgot Password?\"";
+        private const string ExpiringPasswordMssgTemplate = "Your password will expire in {0} day(s). Please change your password.";
+
+
+        public AuthorizationServerProvider(ICryptographer cryptographer, IViewRepository<AppClientView> appClientViewRepository, IBus bus, IViewRepository<AppUserView> appUserViewRepository)
         {
-            _appUserViewRepository = appUserViewRepository;
-            _authenticationService = authenticationService;
             _cryptographer = cryptographer;
             _appClientViewRepository = appClientViewRepository;
+            _bus = bus;
+            _appUserViewRepository = appUserViewRepository;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -38,12 +47,12 @@ namespace WebApp.Services.Impl
 
             if (context.ClientId == null)
             {
-                context.Validated();
-                // context.SetError("invalid_clientId", "ClientId should be sent."); // To restrict using clientId use this line.
+                //context.Validated();
+                context.SetError("invalid_clientId", "ClientId should be sent."); // To restrict using clientId use this line.
                 return Task.FromResult<object>(null);
             }
 
-            var client = _appClientViewRepository.GetByKey(Property.Of<AppClientView>(x=>x.Name), context.ClientId);
+            var client = _appClientViewRepository.GetByKey(Property.Of<AppClientView>(x => x.Name), context.ClientId);
 
             if (client == null)
             {
@@ -77,44 +86,85 @@ namespace WebApp.Services.Impl
             }
 
             context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
-            context.OwinContext.Set("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
 
             context.Validated();
 
             return Task.FromResult<object>(null);
         }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin") ?? "*";
-
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var user =  _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x=>x.Name), context.UserName);
+            var user = Formatter.EmailId(context.UserName) ? _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Email), context.UserName) : _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Mobile), context.UserName);
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                context.SetError("invalid_grant", UserDoesNotExistMssg);
+                return Task.FromResult<object>(null);
             }
 
-            if (_authenticationService.PasswordMatches(user, context.Password))
+            var message = string.Empty;
+            if (!CheckGrant(user, context.Password, ref message))
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                context.SetError("invalid_grant", message);
+
+                _bus.Send<UserLoginFailedCommand>(m =>
+                {
+                    m.UserId = user.Id;
+                });
+
+                return Task.FromResult<object>(null);
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", user.ProfileName));
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
 
-            var props = CreateProperties(context.UserName, context.ClientId);
+            var tokenId = GuidComb.New();
+            
+            var propserties = new AuthenticationProperties(new Dictionary<string, string>
+            {
+                { "as:client_id", context.ClientId },
+                { "as:token_id", tokenId.ToString() },
+                { "as:user_id", user.Id.ToString()},
+                { "as:user_name", user.Name }
+            });
 
-            var ticket = new AuthenticationTicket(identity, props);
+            var ticket = new AuthenticationTicket(identity, propserties);
 
             context.Validated(ticket);
+            return Task.FromResult<object>(null);
+        }
+
+        private bool CheckGrant(AppUserView user, string password, ref string message)
+        {
+            if (user.UserStatus != null && user.UserStatus.Equals(UserStatus.Disabled))
+            {
+                message = LockedAccountMssg;
+                return false;
+            }
+
+            if (!_cryptographer.GetPasswordHash(password, user.PasswordSalt).Equals(user.PasswordHash))
+            {
+                message = UserDoesNotExistMssg;
+                return false;
+            }
+
+            if (!user.LastPasswordChangedDate.HasValue) return true;
+            
+            var passwordExpirationDate = user.LastPasswordChangedDate.Value.AddMonths(PasswordValidPeriod);
+            var days = (passwordExpirationDate - SystemTime.Now()).Days;
+            if (days <= 0)
+            {
+                message = ExpiredPasswordMssg;
+                return false;
+            }
+
+            message = string.Format(ExpiringPasswordMssgTemplate, days);
+            
+            return true;
         }
 
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
@@ -125,7 +175,6 @@ namespace WebApp.Services.Impl
             if (originalClient != currentClient)
             {
                 context.SetError("invalid_clientId", "Refresh token is issued to a different clientId.");
-
                 return Task.FromResult<object>(null);
             }
 
@@ -149,15 +198,6 @@ namespace WebApp.Services.Impl
             }
 
             return Task.FromResult<object>(null);
-        }
-
-        public static AuthenticationProperties CreateProperties(string userName, string clientId = null)
-        {
-            return new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    { "as:client_id", clientId ?? string.Empty },
-                    { "userName", userName }
-                });
         }
 
     }

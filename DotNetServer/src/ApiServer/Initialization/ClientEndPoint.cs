@@ -43,6 +43,7 @@ namespace WebApp.Initialization
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
             var configuration = new BusConfiguration();
+            configuration.EndpointName("ApiServer");
             configuration.UseSerialization<JsonSerializer>();
             configuration.Transactions().Enable();
             configuration.AutoSubscribe().AutoSubscribePlainMessages();
@@ -52,13 +53,11 @@ namespace WebApp.Initialization
             configuration.Conventions().DefiningEventsAs(t => t.Namespace != null && t.Namespace.StartsWith("NSBus.Dto.Events"));
             configuration.Conventions().DefiningMessagesAs(t => t.Namespace != null && t.Namespace.StartsWith("NSBus.Dto.Messages"));
             configuration.PurgeOnStartup(true);
-            configuration.EndpointName("ApiServer");
             configuration.EnableInstallers();
 
             Bus.Create(configuration);//this will run the installers
 
             Console.Write(Container.WhatDoIHave());
         }
-        
     }
 }

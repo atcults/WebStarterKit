@@ -1,3 +1,5 @@
+using Common.Helpers;
+using Core.Domain.Model;
 using NUnit.Framework;
 
 namespace IntegrationTests
@@ -16,7 +18,15 @@ namespace IntegrationTests
         public void LoadData()
         {
             var adminUser = GetPersistedSiteUser();
-            Persist(adminUser);
+
+            var token = new TokenStore
+            {
+                Id = GuidComb.New(),
+                ClientName = "abc",
+                UserId = adminUser.Id,
+                UserName = "",
+            };
+            Persist(token);
         }
     }
 }

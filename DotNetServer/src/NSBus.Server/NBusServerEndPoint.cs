@@ -27,12 +27,11 @@ namespace NSBus.Server
             }));
 
             AutoMapperConfiguration.Configure(Container.GetInstance);
-
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
-
+            
+            configuration.EndpointName("ApiServerService");
             configuration.UseSerialization<JsonSerializer>();
             configuration.Transactions().Enable();
-            configuration.EndpointName("ApiServerService");
             configuration.UseContainer<StructureMapBuilder>(c => c.ExistingContainer(Container));
             configuration.UsePersistence<InMemoryPersistence>();
             configuration.Conventions().DefiningCommandsAs(t => t.Namespace != null && t.Namespace.StartsWith("NSBus.Dto.Commands"));

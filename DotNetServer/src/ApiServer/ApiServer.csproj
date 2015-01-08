@@ -83,6 +83,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Cors">
+      <HintPath>..\packages\Microsoft.Owin.Cors.3.0.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
@@ -131,6 +134,9 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
@@ -181,9 +187,11 @@
     <Compile Include="Initialization\Automapper\Resolvers\AppUserCodeToIdResolver.cs" />
     <Compile Include="Initialization\Automapper\ViewToResponseProfile.cs" />
     <Compile Include="Initialization\ClientEndPoint.cs" />
+    <Compile Include="Initialization\ConfigErrorQueue.cs" />
     <Compile Include="Initialization\KeepAlive.cs" />
     <Compile Include="Initialization\SmartHttpControllerActivator.cs" />
     <Compile Include="Initialization\UiRegistry.cs" />
+    <Compile Include="Initialization\UnicastBusConfiguration.cs" />
     <Compile Include="ModelService\IAttachmentModelService.cs" />
     <Compile Include="ModelService\IModelService.cs" />
     <Compile Include="ModelService\Impl\ModelService.cs" />
@@ -200,11 +208,12 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ModelService\IAppUserModelService.cs" />
     <Compile Include="ModelService\Impl\AppUserModelService.cs" />
-    <Compile Include="Services\IAuthenticationService.cs" />
+    <Compile Include="Services\Impl\AccessTokenProvider.cs" />
     <Compile Include="Services\Impl\AuthorizationServerProvider.cs" />
+    <Compile Include="Services\Impl\BearerAuthenticationProvider.cs" />
     <Compile Include="Services\Impl\RefreshTokenProvider.cs" />
+    <Compile Include="Services\IRefreshTokenProvider.cs" />
     <Compile Include="Services\IReportDataProvider.cs" />
-    <Compile Include="Services\Impl\AuthenticationService.cs" />
     <Compile Include="Services\Impl\ReportDataProvider.cs" />
     <Compile Include="Services\Impl\UserSession.cs" />
     <Compile Include="Services\IUserSession.cs" />

@@ -44,7 +44,7 @@ namespace WebApp.Controllers
             
             try
             {
-                var performingUser = UserSession.GetCurrentUser() ?? UserSession.GetAnonymousUser();
+                var performingUser = UserSession.GetCurrentUser();
 
                 var auditedCommand = command as AuditedCommand;
                 if (auditedCommand != null)

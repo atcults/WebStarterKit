@@ -88,14 +88,18 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="CommandHandlers\AddLeadHandler.cs" />
+    <Compile Include="CommandHandlers\RemoveTokenHandler.cs" />
     <Compile Include="CommandHandlers\ResetPasswordHandler.cs" />
     <Compile Include="CommandHandlers\AddNewsLetterHandler.cs" />
+    <Compile Include="CommandHandlers\UserGrantRefreshHandler.cs" />
+    <Compile Include="CommandHandlers\UserLoginFailedHandler.cs" />
+    <Compile Include="ConfigErrorQueue.cs" />
     <Compile Include="Initialization\Automapper\AutoMapperConfiguration.cs" />
     <Compile Include="Initialization\Automapper\Converters\TypeConverter.cs" />
     <Compile Include="Initialization\NBusServerRegistry.cs" />
     <Compile Include="MessageHandler.cs" />
     <Compile Include="NBusServerEndPoint.cs" />
-    <Compile Include="CommandHandlers\UpdateUserAuthDataHandler.cs" />
+    <Compile Include="CommandHandlers\UserGrantAccessHandler.cs" />
     <Compile Include="CommandHandlers\PasswordRecoveryTokenHandler.cs" />
     <Compile Include="CommandHandlers\RegisterNewAppUserHandler.cs" />
     <Compile Include="CommandHandlers\GenerateSimpleExportHandler.cs" />

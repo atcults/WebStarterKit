@@ -7,11 +7,15 @@ namespace Core.Views
     [ViewName("TokenStoreView")]
 	public class TokenStoreView : View
 	{
-		public string Name { get; set; }
-        public string TokenHash { get; set; }
-		public Guid? ClientId { get; set; }
-		public string TicketHash { get; set; }
-		public DateTime? IssuedUtc { get; set; }
-		public DateTime? ExpiresUtc { get; set; }
+		public string ClientName { get; set; }
+        public string UserName { get; set; }
+        public string AccessTokenHash { get; set; }
+        public DateTime? AccessTokenIssuedUtc { get; set; }
+        public DateTime? AccessTokenExpiresUtc { get; set; }
+        public string RefreshTokenHash { get; set; }
+		public DateTime? RefreshTokenIssuedUtc { get; set; }
+        public DateTime? RefreshTokenExpiresUtc { get; set; }
+        public int? TimesTokenGiven { get; set; }
+        public string ProtectedTicket { get; set; }
 	}
 }

@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[AppClient](
 	[Name] [varchar](256) NULL,
 	[Secret] [varchar](256) NULL,
 	[ApplicationTypeValue] [char](2) NULL,
+	[AccessTokenLifeTime] [integer] NULL,
 	[RefreshTokenLifeTime] [integer] NULL,
 	[AllowedOrigin] [varchar](256) NULL,
 	[IsActive] [bit] NULL,
@@ -37,6 +38,7 @@ AS
 	,AC.[Name]
 	,AC.[Secret]
 	,AC.[ApplicationTypeValue]
+	,AC.[AccessTokenLifeTime]
 	,AC.[RefreshTokenLifeTime]
 	,AC.[AllowedOrigin]
 	,AC.[IsActive]
@@ -57,6 +59,7 @@ CREATE PROC [dbo].[usp_AppClientInsert]
 	,@Name [varchar](256)  = NULL
 	,@Secret [varchar](256)  = NULL
 	,@ApplicationTypeValue [char](2)  = NULL
+	,@AccessTokenLifeTime [Integer] = NULL
 	,@RefreshTokenLifeTime [integer]  = NULL
 	,@AllowedOrigin [varchar](256)  = NULL
 	,@IsActive [bit]  = NULL
@@ -67,8 +70,8 @@ AS
 
 	BEGIN TRAN
 
-	INSERT INTO [dbo].[AppClient] ([Id], [Name], [Secret], [ApplicationTypeValue], [RefreshTokenLifeTime], [AllowedOrigin], [IsActive])
-	SELECT @Id, @Name, @Secret, @ApplicationTypeValue, @RefreshTokenLifeTime, @AllowedOrigin, @IsActive
+	INSERT INTO [dbo].[AppClient] ([Id], [Name], [Secret], [ApplicationTypeValue], [AccessTokenLifeTime], [RefreshTokenLifeTime], [AllowedOrigin], [IsActive])
+	SELECT @Id, @Name, @Secret, @ApplicationTypeValue, @AccessTokenLifeTime, @RefreshTokenLifeTime, @AllowedOrigin, @IsActive
 
 	COMMIT;
 
@@ -77,6 +80,7 @@ AS
 	,AC.[Name]
 	,AC.[Secret]
 	,AC.[ApplicationTypeValue]
+	,AC.[AccessTokenLifeTime]
 	,AC.[RefreshTokenLifeTime]
 	,AC.[AllowedOrigin]
 	,AC.[IsActive]
@@ -96,6 +100,7 @@ CREATE PROC [dbo].[usp_AppClientUpdate]
 	,@Name [varchar](256)  = NULL
 	,@Secret [varchar](256)  = NULL
 	,@ApplicationTypeValue [char](2)  = NULL
+	,@AccessTokenLifeTime [Integer] = NULL
 	,@RefreshTokenLifeTime [integer]  = NULL
 	,@AllowedOrigin [varchar](256)  = NULL
 	,@IsActive [bit]  = NULL
@@ -107,7 +112,7 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[AppClient]
-	SET [Id] = @Id, [Name] = @Name, [Secret] = @Secret, [ApplicationTypeValue] = @ApplicationTypeValue, [RefreshTokenLifeTime] = @RefreshTokenLifeTime, [AllowedOrigin] = @AllowedOrigin, [IsActive] = @IsActive	WHERE [Id] = @Id
+	SET [Id] = @Id, [Name] = @Name, [Secret] = @Secret, [ApplicationTypeValue] = @ApplicationTypeValue, [AccessTokenLifeTime] = @AccessTokenLifeTime, [RefreshTokenLifeTime] = @RefreshTokenLifeTime, [AllowedOrigin] = @AllowedOrigin, [IsActive] = @IsActive	WHERE [Id] = @Id
 
 
 	COMMIT;
@@ -117,6 +122,7 @@ AS
 	,AC.[Name]
 	,AC.[Secret]
 	,AC.[ApplicationTypeValue]
+	,AC.[AccessTokenLifeTime]
 	,AC.[RefreshTokenLifeTime]
 	,AC.[AllowedOrigin]
 	,AC.[IsActive]

@@ -1,18 +1,20 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Threading;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Infrastructure;
+using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using WebApp.Filters;
 using WebApp.Formatters;
+using WebApp.Initialization;
+using WebApp.Services;
 
-[assembly: OwinStartup(typeof(WebApp.Initialization.OwinStartup))]
+[assembly: OwinStartup(typeof(OwinStartup))]
 
 namespace WebApp.Initialization
 {
@@ -59,15 +61,25 @@ namespace WebApp.Initialization
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
-                Provider = ClientEndPoint.Container.GetInstance<IOAuthAuthorizationServerProvider>(),
-                RefreshTokenProvider = ClientEndPoint.Container.GetInstance<IAuthenticationTokenProvider>()
+                Provider = ClientEndPoint.Container.GetInstance<IAuthorizationServerProvider>(),
+                AccessTokenProvider = ClientEndPoint.Container.GetInstance<IAccessTokenProvider>(),
+                RefreshTokenProvider = ClientEndPoint.Container.GetInstance<IRefreshTokenProvider>()
             };
 
             // TokenHash Generation
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
 
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            // Token validator
+            var bearerAuthenticationOptions = new OAuthBearerAuthenticationOptions
+            {
+                AuthenticationMode = AuthenticationMode.Active,
+                Provider = ClientEndPoint.Container.GetInstance<IBearerAuthenticationProvider>(),
+                AccessTokenProvider = ClientEndPoint.Container.GetInstance<IAccessTokenProvider>()
+            };
+
+            app.UseOAuthBearerAuthentication(bearerAuthenticationOptions);
+
+            app.UseCors(CorsOptions.AllowAll);
         }
     }
 }

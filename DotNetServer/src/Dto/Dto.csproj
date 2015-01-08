@@ -112,7 +112,6 @@
     <Compile Include="ApiRequests\AppUserForms\RegistrationForm.cs" />
     <Compile Include="ApiRequests\ConfigForms\SendMailForm.cs" />
     <Compile Include="ApiRequests\ConfigForms\NetworkConfigForm.cs" />
-    <Compile Include="ApiRequests\AppUserForms\LoginForm.cs" />
     <Compile Include="ApiRequests\ConfigForms\SmsConfigForm.cs" />
     <Compile Include="ApiRequests\AppUserForms\RecoverPasswordForm.cs" />
     <Compile Include="ApiRequests\AppUserForms\ResetPasswordForm.cs" />

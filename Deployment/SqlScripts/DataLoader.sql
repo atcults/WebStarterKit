@@ -58,9 +58,9 @@ INSERT INTO [dbo].[Template]([Id],[Name],[MailBody],[SmsBody]) VALUES
 
 DELETE FROM [dbo].[AppClient]
 
-INSERT INTO [dbo].[AppClient] ([Id],[Name],[Secret],[ApplicationTypeValue],[RefreshTokenLifeTime],[AllowedOrigin],[IsActive])
-VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec290030','Web','Web','JS',20,'*',1),
-		('8ee713a6-f7c8-4715-a52d-2dd2ec290031','Test','App','NC',20,'*',1)
+INSERT INTO [dbo].[AppClient] ([Id],[Name],[Secret],[ApplicationTypeValue],[AccessTokenLifeTime],[RefreshTokenLifeTime],[AllowedOrigin],[IsActive])
+VALUES ('8ee713a6-f7c8-4715-a52d-2dd2ec290030','Web','vSsar3708Jvp9Szi2NWZZ02Bqp1qRCFpbcTZPdBhnWgs5WtNZKnvCXdhztmeD2cmW192CF5bDufKRpayrW/isg==','JS',30,200,'*',1),
+		('8ee713a6-f7c8-4715-a52d-2dd2ec290031','Test','vSsar3708Jvp9Szi2NWZZ02Bqp1qRCFpbcTZPdBhnWgs5WtNZKnvCXdhztmeD2cmW192CF5bDufKRpayrW/isg==','NC',30,200,'*',1)
  
 ------------------------------------------
 -- Profile Table Data

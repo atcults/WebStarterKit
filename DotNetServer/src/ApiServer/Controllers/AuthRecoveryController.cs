@@ -19,13 +19,14 @@ namespace WebApp.Controllers
         private readonly IViewRepository<AppUserView> _appUserViewRepository;
         private readonly ICryptographer _cryptographer;
 
-        public IBus Bus { get; set; }
+        private readonly IBus _bus;
 
-        public AuthRecoveryController(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<AppUserView> appUserViewRepository, ICryptographer cryptographer)
+        public AuthRecoveryController(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<AppUserView> appUserViewRepository, ICryptographer cryptographer, IBus bus)
             : base(userSession, mappingEngine)
         {
             _appUserViewRepository = appUserViewRepository;
             _cryptographer = cryptographer;
+            _bus = bus;
         }
 
         public HttpResponseMessage Post(RecoverPasswordForm form)
@@ -50,7 +51,7 @@ namespace WebApp.Controllers
                 return Content(response);
             }
 
-            Bus.Send<PasswordRecoveryTokenCommand>(c =>
+            _bus.Send<PasswordRecoveryTokenCommand>(c =>
             {
                 c.UserId = member.Id;
             });
@@ -91,7 +92,7 @@ namespace WebApp.Controllers
                             response.AddError("Newpassword and confirmpassword", "are not same.");
                         else
                         {
-                            Bus.Send<ResetPasswordCommand>(c =>
+                            _bus.Send<ResetPasswordCommand>(c =>
                             {
                                 c.Token = form.Token;
                                 c.NewPassword = form.NewPassword;

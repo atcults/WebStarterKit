@@ -59,14 +59,18 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\AddLeadCommand.cs" />
-    <Compile Include="Commands\AddRefreshTokenCommand.cs" />
+    <Compile Include="Commands\RemoveTokenCommand.cs" />
     <Compile Include="Commands\ResetPasswordCommand.cs" />
     <Compile Include="Commands\AddNewsLetterCommand.cs" />
+    <Compile Include="Commands\UserGrantAccessCommand.cs" />
+    <Compile Include="Commands\UserGrantRefreshCommand.cs" />
+    <Compile Include="Commands\UserLoginFailedCommand.cs" />
     <Compile Include="Commands\UserLoginPostCommand.cs" />
     <Compile Include="Commands\RegisterNewAppUserCommand.cs" />
     <Compile Include="Commands\PasswordRecoveryTokenCommand.cs" />
     <Compile Include="Commands\GenerateSimpleExportCommand.cs" />
     <Compile Include="Commands\SendNotificationCommand.cs" />
+    <Compile Include="Messages\RemoveTokenCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
