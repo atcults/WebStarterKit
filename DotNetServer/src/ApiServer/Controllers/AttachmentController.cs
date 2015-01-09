@@ -7,7 +7,6 @@ using Common.SystemSettings;
 using Core.Commands.AttachmentCommands;
 using Dto.ApiRequests.AttachmentForms;
 using Dto.ApiResponses;
-using WebApp.Services;
 using System.Net.Http;
 
 
@@ -15,11 +14,6 @@ namespace WebApp.Controllers
 {
     public class AttachmentController : SmartApiController
     {
-
-        public AttachmentController(IUserSession userSession, IMappingEngine mappingEngine) : base(userSession, mappingEngine)
-        {
-        }
-
         public HttpResponseMessage Post(AttachmentUploadForm form)
         {
             var response = new WebApiResponseBase();

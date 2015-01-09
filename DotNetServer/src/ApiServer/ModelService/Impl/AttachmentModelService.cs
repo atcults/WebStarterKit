@@ -7,15 +7,13 @@ using Core.Views;
 using Dto.ApiRequests;
 using Dto.ApiResponses;
 using Dto.ApiResponses.AttachmentResponses;
-using WebApp.Services;
 
 namespace WebApp.ModelService.Impl
 {
     public class AttachmentModelService : BaseModelService, IAttachmentModelService
     {
         private readonly IViewRepository<AttachmentView> _attachmentViewRepository;
-        public AttachmentModelService(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<AttachmentView> attachmentViewRepository)
-            : base(userSession, mappingEngine)
+        public AttachmentModelService(IViewRepository<AttachmentView> attachmentViewRepository)
         {
             _attachmentViewRepository = attachmentViewRepository;
         }

@@ -70,7 +70,7 @@
     <Compile Include="Commands\PasswordRecoveryTokenCommand.cs" />
     <Compile Include="Commands\GenerateSimpleExportCommand.cs" />
     <Compile Include="Commands\SendNotificationCommand.cs" />
-    <Compile Include="Messages\RemoveTokenCommand.cs" />
+    <Compile Include="Messages\GenericResponseMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

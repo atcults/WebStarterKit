@@ -11,7 +11,6 @@ using Dto.ApiResponses.AttachmentResponses;
 using Dto.ApiResponses.ContactResponses;
 using Dto.ApiResponses.LeadResponses;
 using Dto.ApiResponses.NoteResponses;
-using WebApp.Services;
 
 namespace WebApp.ModelService.Impl
 {
@@ -23,8 +22,7 @@ namespace WebApp.ModelService.Impl
         private readonly IViewRepository<AssignedContactView> _assignedContactViewRepository;
         private readonly IViewRepository<AttachmentView> _attachmentViewRepository;
 
-        public LeadModelService(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<LeadView> leadViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository, IViewRepository<ContactView> contactViewRepository)
-            : base(userSession, mappingEngine)
+        public LeadModelService(IViewRepository<LeadView> leadViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository, IViewRepository<ContactView> contactViewRepository)
         {
             _leadViewRepository = leadViewRepository;
             _noteViewRepository = noteViewRepository;

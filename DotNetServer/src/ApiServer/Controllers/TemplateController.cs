@@ -10,7 +10,6 @@ using Dto.ApiRequests;
 using Dto.ApiRequests.TemplateForms;
 using Dto.ApiResponses;
 using Dto.ApiResponses.TemplateResponses;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -18,8 +17,7 @@ namespace WebApp.Controllers
     {
         private readonly IViewRepository<TemplateView> _templateViewRepository;
 
-        public TemplateController(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<TemplateView> templateViewRepository)
-            : base(userSession, mappingEngine)
+        public TemplateController(IViewRepository<TemplateView> templateViewRepository)
         {
             _templateViewRepository = templateViewRepository;
         }

@@ -1,21 +1,21 @@
 ﻿using System.Net.Http;
-using AutoMapper;
+using System.Web.Http;
 using Common.Service;
 using Core.Commands.AppUserCommands;
 using Dto.ApiRequests.AppUserForms;
 using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class AuthController : SmartApiController
     {
         private readonly ICryptographer _cryptographer;
         private readonly IBus _bus;
 
-        public AuthController(IUserSession userSession, IMappingEngine mappingEngine, ICryptographer cryptographer, IBus bus) : base(userSession, mappingEngine)
+        public AuthController(ICryptographer cryptographer, IBus bus)
         {
             _cryptographer = cryptographer;
             _bus = bus;

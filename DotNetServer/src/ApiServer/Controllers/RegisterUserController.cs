@@ -1,12 +1,10 @@
 using System.Net.Http;
-using AutoMapper;
 using Common.Base;
 using Dto.ApiRequests.AppUserForms;
 using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -14,8 +12,7 @@ namespace WebApp.Controllers
     {
         private readonly IModelService _modelService;
         public IBus Bus { get; set; }
-        public RegisterUserController(IUserSession userSession, IMappingEngine mappingEngine, IModelService modelService)
-            : base(userSession, mappingEngine)
+        public RegisterUserController(IModelService modelService)
         {
             _modelService = modelService;
         }

@@ -178,7 +178,6 @@
     <Compile Include="Initialization\Automapper\AutoMapperConfiguration.cs" />
     <Compile Include="Initialization\Automapper\EntityToResponseProfile.cs" />
     <Compile Include="Initialization\Automapper\FormToCommandProfile.cs" />
-    <Compile Include="Initialization\Automapper\Resolvers\CurrentUserResolver.cs" />
     <Compile Include="Initialization\Automapper\Converters\TypeConverter.cs" />
     <Compile Include="Initialization\Automapper\MappingExpressionExtensions.cs" />
     <Compile Include="Initialization\Automapper\Resolvers\AppUserCodeToIdResolver.cs" />
@@ -210,8 +209,6 @@
     <Compile Include="Services\Impl\BearerAuthenticationProvider.cs" />
     <Compile Include="Services\Impl\RefreshTokenProvider.cs" />
     <Compile Include="Services\IRefreshTokenProvider.cs" />
-    <Compile Include="Services\Impl\UserSession.cs" />
-    <Compile Include="Services\IUserSession.cs" />
     <Compile Include="Initialization\OwinStartup.cs" />
   </ItemGroup>
   <ItemGroup>

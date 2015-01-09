@@ -5,16 +5,11 @@ using Common.SystemSettings;
 using Dto.ApiRequests.ConfigForms;
 using Dto.ApiResponses;
 using Dto.ApiResponses.ConfigResponses;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class NetworkConfigController : SmartApiController
     {
-        public NetworkConfigController(IUserSession userSession, IMappingEngine mappingEngine) : base(userSession, mappingEngine)
-        {
-        }
-
         public HttpResponseMessage Get()
         {
             var networkConfig = ConfigProvider.GetNetworkConfig();

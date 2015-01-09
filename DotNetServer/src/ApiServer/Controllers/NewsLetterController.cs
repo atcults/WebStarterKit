@@ -6,7 +6,6 @@ using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 using System.Net.Http;
 using Dto.ApiRequests.NewsLetter;
 
@@ -17,7 +16,7 @@ namespace WebApp.Controllers
         private readonly IModelService _modelService;
         public IBus Bus { get; set; }
 
-		public NewsLetterController(IUserSession userSession, IMappingEngine mappingEngine, IModelService modelService) : base(userSession, mappingEngine)
+		public NewsLetterController(IModelService modelService)
 		{
 		    _modelService = modelService;
 		}

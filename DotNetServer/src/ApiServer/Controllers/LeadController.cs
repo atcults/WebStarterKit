@@ -7,7 +7,6 @@ using Dto.ApiRequests;
 using Dto.ApiRequests.LeadForms;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -16,8 +15,7 @@ namespace WebApp.Controllers
         public IBus Bus { get; set; }
         private readonly ILeadModelService _leadModelService;
 
-        public LeadController(IUserSession userSession, IMappingEngine mappingEngine, ILeadModelService leadModelService)
-            : base(userSession, mappingEngine)
+        public LeadController(ILeadModelService leadModelService)
         {
             _leadModelService = leadModelService;
         }

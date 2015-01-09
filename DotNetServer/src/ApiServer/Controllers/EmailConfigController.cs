@@ -5,16 +5,11 @@ using Common.SystemSettings;
 using Dto.ApiRequests.ConfigForms;
 using Dto.ApiResponses;
 using Dto.ApiResponses.ConfigResponses;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class EmailConfigController : SmartApiController
     {
-        public EmailConfigController(IUserSession userSession, IMappingEngine mappingEngine)
-            : base(userSession, mappingEngine)
-        { }
-
         public HttpResponseMessage Get()
         {
             var emailConfig = ConfigProvider.GetEmailConfig();

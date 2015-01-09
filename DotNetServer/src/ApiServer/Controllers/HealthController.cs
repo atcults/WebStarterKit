@@ -7,7 +7,6 @@ using Core.Views;
 using Dto.ApiResponses;
 using Dto.ApiResponses.HealthResponses;
 using NServiceBus;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -17,8 +16,7 @@ namespace WebApp.Controllers
 
         private readonly IHealthViewRepository _healthViewRepository;
 
-        public HealthController(IUserSession userSession, IMappingEngine mappingEngine, IHealthViewRepository healthViewRepository)
-            : base(userSession, mappingEngine)
+        public HealthController(IHealthViewRepository healthViewRepository)
         {
             _healthViewRepository = healthViewRepository;
         }

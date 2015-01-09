@@ -11,7 +11,6 @@ using Dto.ApiResponses.AttachmentResponses;
 using Dto.ApiResponses.ContactResponses;
 using Dto.ApiResponses.NoteResponses;
 using Dto.ApiResponses.TaskLogResponses;
-using WebApp.Services;
 
 namespace WebApp.ModelService.Impl
 {
@@ -23,8 +22,7 @@ namespace WebApp.ModelService.Impl
         private readonly IViewRepository<NoteView> _noteViewRepository;
         private readonly IViewRepository<AttachmentView> _attachmentViewRepository;
 
-        public TaskLogModelService(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<TaskLogView> taskLogViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<ContactView> contactViewRepository)
-            : base(userSession, mappingEngine)
+        public TaskLogModelService(IViewRepository<TaskLogView> taskLogViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<ContactView> contactViewRepository)
         {
             _taskLogViewRepository = taskLogViewRepository;
             _assignedContactViewRepository = assignedContactViewRepository;

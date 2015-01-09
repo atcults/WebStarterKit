@@ -10,7 +10,6 @@ using Dto.ApiResponses;
 using Dto.ApiResponses.AttachmentResponses;
 using Dto.ApiResponses.ContactResponses;
 using Dto.ApiResponses.NoteResponses;
-using WebApp.Services;
 
 namespace WebApp.ModelService.Impl
 {
@@ -21,8 +20,7 @@ namespace WebApp.ModelService.Impl
         private readonly IViewRepository<NoteView> _noteViewRepository;
         private readonly IViewRepository<AttachmentView> _attachmentViewRepository;
 
-        public ContactModelService(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<ContactView> contactViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository)
-            : base(userSession, mappingEngine)
+        public ContactModelService(IViewRepository<ContactView> contactViewRepository, IViewRepository<NoteView> noteViewRepository, IViewRepository<AttachmentView> attachmentViewRepository, IViewRepository<AssignedContactView> assignedContactViewRepository)
         {
             _contactViewRepository = contactViewRepository;
             _noteViewRepository = noteViewRepository;

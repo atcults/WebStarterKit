@@ -7,7 +7,6 @@ using Dto.ApiRequests;
 using Dto.ApiRequests.AppUserForms;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -15,7 +14,7 @@ namespace WebApp.Controllers
     {
         private readonly IAppUserModelService _appUserModelService;
         public IBus Bus { get; set; }
-        public AppUserController(IUserSession userSession, IMappingEngine mappingEngine, IAppUserModelService appUserModelService) : base(userSession, mappingEngine)
+        public AppUserController(IAppUserModelService appUserModelService)
         {
             _appUserModelService = appUserModelService;
         }

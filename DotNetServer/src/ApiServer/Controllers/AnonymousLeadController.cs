@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Net.Http;
-using AutoMapper;
 using Common.Base;
 using Dto.ApiRequests.LeadForms;
 using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -16,8 +14,7 @@ namespace WebApp.Controllers
         private readonly IModelService _modelService;
         public IBus Bus { get; set; }
 
-        public AnonymousLeadController(IUserSession userSession, IMappingEngine mappingEngine, IModelService modelService)
-            : base(userSession, mappingEngine)
+        public AnonymousLeadController(IModelService modelService)
         {
             _modelService = modelService;
         }

@@ -7,7 +7,6 @@ using Dto.ApiRequests;
 using Dto.ApiRequests.ContactForms;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -16,8 +15,7 @@ namespace WebApp.Controllers
         public IBus Bus { get; set; }
         private readonly IContactModelService _contactModelService;
 
-        public ContactController(IUserSession userSession, IMappingEngine mappingEngine, IContactModelService contactModelService)
-            : base(userSession, mappingEngine)
+        public ContactController(IContactModelService contactModelService)
         {
             _contactModelService = contactModelService;
         }

@@ -5,30 +5,33 @@ using System.Web.Http;
 using AutoMapper;
 using Common.Base;
 using Common.Extensions;
+using Common.Helpers;
 using Core.Commands;
 using Core.Domain;
 using Core.ReadWrite;
+using Core.ViewOnly;
 using Core.Views;
 using Dto.ApiResponses;
 using WebApp.Initialization;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class SmartApiController : ApiController
     {
-        protected IUserSession UserSession { get; private set; }
         protected IMappingEngine MappingEngine { get; private set; }
 
-        public SmartApiController(IUserSession userSession, IMappingEngine mappingEngine)
+        private readonly IViewRepository<AppUserView> _appUserViewRepository;
+
+        public SmartApiController()
         {
-            UserSession = userSession;
-            MappingEngine = mappingEngine;
+            MappingEngine = ClientEndPoint.Container.GetInstance<IMappingEngine>();
+            _appUserViewRepository = ClientEndPoint.Container.GetInstance<IViewRepository<AppUserView>>();
         }
 
         protected AppUserView GetCurrentUser()
         {
-            return UserSession.GetCurrentUser();
+            var username = RequestContext.Principal.Identity.Name;
+            return Formatter.EmailId(username) ? _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Email), username) : _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Mobile), username);
         }
 
         protected HttpResponseMessage ExecuteCommand<TCommand>(TCommand command) where TCommand : ICommand
@@ -44,7 +47,7 @@ namespace WebApp.Controllers
             
             try
             {
-                var performingUser = UserSession.GetCurrentUser();
+                var performingUser = GetCurrentUser();
 
                 var auditedCommand = command as AuditedCommand;
                 if (auditedCommand != null)

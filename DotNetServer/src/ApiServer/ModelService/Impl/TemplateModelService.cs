@@ -6,15 +6,13 @@ using Core.Views;
 using Dto.ApiRequests;
 using Dto.ApiResponses;
 using Dto.ApiResponses.TemplateResponses;
-using WebApp.Services;
 
 namespace WebApp.ModelService.Impl
 {
     public class TemplateModelService : BaseModelService, ITemplateModelService
     {
         private readonly IViewRepository<TemplateView> _templateViewRepository;
-        public TemplateModelService(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<TemplateView> templateViewRepository)
-            : base(userSession, mappingEngine)
+        public TemplateModelService(IViewRepository<TemplateView> templateViewRepository)
         {
             _templateViewRepository = templateViewRepository;
         }

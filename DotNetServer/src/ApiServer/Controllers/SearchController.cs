@@ -1,7 +1,5 @@
 ﻿using System.Net.Http;
-using AutoMapper;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -9,8 +7,7 @@ namespace WebApp.Controllers
     {
         private readonly IAttachmentModelService _attachmentModelService;
 
-        public SearchController(IUserSession userSession, IMappingEngine mappingEngine, IAttachmentModelService attachmentModelService)
-            : base(userSession, mappingEngine)
+        public SearchController(IAttachmentModelService attachmentModelService)
         {
             _attachmentModelService = attachmentModelService;
         }

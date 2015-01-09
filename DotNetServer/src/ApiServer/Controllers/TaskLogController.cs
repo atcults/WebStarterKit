@@ -1,12 +1,10 @@
 using System;
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
 using Core.Commands.TaskLogCommands;
 using Dto.ApiRequests;
 using NServiceBus;
 using WebApp.ModelService;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -14,8 +12,7 @@ namespace WebApp.Controllers
     {
         private readonly ITaskLogModelService _taskLogModelService;
         public IBus Bus { get; set; }
-        public TaskLogController(IUserSession userSession, IMappingEngine mappingEngine, ITaskLogModelService taskLogModelService)
-            : base(userSession, mappingEngine)
+        public TaskLogController(ITaskLogModelService taskLogModelService)
         {
             _taskLogModelService = taskLogModelService;
         }

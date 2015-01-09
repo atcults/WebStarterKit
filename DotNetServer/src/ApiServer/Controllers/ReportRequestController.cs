@@ -1,11 +1,9 @@
 using System.Net.Http;
 using System.Web.Http;
-using AutoMapper;
 using Dto.ApiRequests;
 using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -13,11 +11,6 @@ namespace WebApp.Controllers
     public class ReportRequestController : SmartApiController
     {
         public IBus Bus { get; set; }
-
-        public ReportRequestController(IUserSession userSession, IMappingEngine mappingEngine)
-            : base(userSession, mappingEngine)
-        {
-        }
 
         public HttpResponseMessage Post(ReportRequestForm form)
         {

@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using AutoMapper;
 using Common.Extensions;
 using Common.Helpers;
 using Common.Service;
@@ -10,7 +9,6 @@ using Dto.ApiRequests.AppUserForms;
 using Dto.ApiResponses;
 using NSBus.Dto.Commands;
 using NServiceBus;
-using WebApp.Services;
 
 namespace WebApp.Controllers
 {
@@ -21,8 +19,7 @@ namespace WebApp.Controllers
 
         private readonly IBus _bus;
 
-        public AuthRecoveryController(IUserSession userSession, IMappingEngine mappingEngine, IViewRepository<AppUserView> appUserViewRepository, ICryptographer cryptographer, IBus bus)
-            : base(userSession, mappingEngine)
+        public AuthRecoveryController(IViewRepository<AppUserView> appUserViewRepository, ICryptographer cryptographer, IBus bus)
         {
             _appUserViewRepository = appUserViewRepository;
             _cryptographer = cryptographer;

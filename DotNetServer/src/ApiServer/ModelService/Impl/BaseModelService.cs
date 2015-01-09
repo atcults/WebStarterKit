@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
-using WebApp.Services;
+using WebApp.Initialization;
 
 namespace WebApp.ModelService.Impl
 {
     public class BaseModelService
     {
-        protected IUserSession UserSession { get; private set; }
         protected IMappingEngine MappingEngine { get; private set; }
 
-        public BaseModelService(IUserSession userSession, IMappingEngine mappingEngine)
+        public BaseModelService()
         {
-            UserSession = userSession;
-            MappingEngine = mappingEngine;
+            MappingEngine = ClientEndPoint.Container.GetInstance<IMappingEngine>();
         }
     }
 }
