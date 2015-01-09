@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Common.Base;
 using Common.Helpers;
 using Common.Service;
 using Core.ViewOnly;
@@ -26,14 +23,14 @@ namespace WebApp.Services.Impl
             _tokenStoreViewRepository = tokenStoreViewRepository;
         }
 
-        public async Task CreateAsync(AuthenticationTokenCreateContext context)
+        public Task CreateAsync(AuthenticationTokenCreateContext context)
         {
             var clientid = context.Ticket.Properties.Dictionary["as:client_id"];
             var tokenId = Guid.Parse(context.Ticket.Properties.Dictionary["as:token_id"]);
 
             if (string.IsNullOrEmpty(clientid))
             {
-                return;
+                return Task.FromResult<object>(null);
             }
             
             var refreshToken = Guid.NewGuid().ToString("n");
@@ -43,10 +40,13 @@ namespace WebApp.Services.Impl
                 m.TokenId = tokenId;
                 m.Client = clientid;
                 m.RefreshTokenHash = _cryptographer.ComputeHash(refreshToken);
+                m.ProtectedTicket = context.SerializeTicket();
                 m.TimeUtc = SystemTime.Now();
             });
 
             context.SetToken(refreshToken);
+
+            return Task.FromResult<object>(null);
         }
 
         public Task ReceiveAsync(AuthenticationTokenReceiveContext context)
@@ -56,7 +56,7 @@ namespace WebApp.Services.Impl
 
             if (tokenStoreView != null)
             {
-                context.DeserializeTicket(tokenStoreView.ProtectedTicket);
+                context.DeserializeTicket(tokenStoreView.RefreshTicket);
             }
 
             return Task.FromResult<object>(null);

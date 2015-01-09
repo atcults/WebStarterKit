@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Common.Base;
 using Common.Helpers;
 using Common.Service;
 using Core.ViewOnly;
@@ -25,7 +24,7 @@ namespace WebApp.Services.Impl
             _tokenStoreViewRepository = tokenStoreViewRepository;
         }
 
-        public async Task CreateAsync(AuthenticationTokenCreateContext context)
+        public Task CreateAsync(AuthenticationTokenCreateContext context)
         {
             var clientid = context.Ticket.Properties.Dictionary["as:client_id"];
             var tokenId = Guid.Parse(context.Ticket.Properties.Dictionary["as:token_id"]);
@@ -33,8 +32,6 @@ namespace WebApp.Services.Impl
             var userName = context.Ticket.Properties.Dictionary["as:user_name"];
 
             var accessToken = Guid.NewGuid().ToString("n");
-
-            var ticket = context.SerializeTicket();
 
             _bus.Send<UserGrantAccessCommand>(m =>
             {
@@ -44,7 +41,7 @@ namespace WebApp.Services.Impl
                 m.UserName = userName;
                 m.AccessTokenHash = _cryptographer.ComputeHash(accessToken);
                 m.TimeUtc = SystemTime.Now();
-                m.ProtectedTicket = ticket;
+                m.ProtectedTicket = context.SerializeTicket();
             });
 
           //   .Register(asyncResult =>
@@ -63,6 +60,8 @@ namespace WebApp.Services.Impl
            // .Register(completionResult => (GenericResponseMessage) completionResult.Messages[0]);
 
             context.SetToken(accessToken);
+
+            return Task.FromResult<object>(null);
         }
 
         public Task ReceiveAsync(AuthenticationTokenReceiveContext context)
@@ -72,7 +71,7 @@ namespace WebApp.Services.Impl
 
             if (tokenStoreView != null)
             {
-                context.DeserializeTicket(tokenStoreView.ProtectedTicket);
+                context.DeserializeTicket(tokenStoreView.AccessTicket);
             }
 
             return Task.FromResult<object>(null);

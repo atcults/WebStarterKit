@@ -27,6 +27,7 @@ namespace NSBus.Server.CommandHandlers
             var token = _tokenStoreRepository.GetById(command.TokenId);
 
             token.RefreshTokenHash = command.RefreshTokenHash;
+            token.RefreshTicket = command.ProtectedTicket;
             token.RefreshTokenIssuedUtc = from;
             token.RefreshTokenExpiresUtc = tillRefresh;
 

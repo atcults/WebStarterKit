@@ -7,19 +7,19 @@ namespace WebApp.Services.Impl
 {
     public class UserSession : IUserSession
     {
-        private readonly IViewRepository<AppUserView> _appUserRepository;
+        private readonly IViewRepository<AppUserView> _appUserViewRepository;
 
-        public UserSession(IViewRepository<AppUserView> appUserRepository)
+        public UserSession(IViewRepository<AppUserView> appUserViewRepository)
         {
-            _appUserRepository = appUserRepository;
+            _appUserViewRepository = appUserViewRepository;
         }
 
         public AppUserView GetCurrentUser()
         {
             if (HttpContext.Current == null) return null;
             var identity = HttpContext.Current.User.Identity;
-            return !identity.IsAuthenticated ? null : Formatter.EmailId(identity.Name) ? _appUserRepository.GetByKey(Property.Of<AppUserView>(x => x.Email), identity.Name)
-               : _appUserRepository.GetByKey(Property.Of<AppUserView>(x => x.Mobile), identity.Name);
+            if (!identity.IsAuthenticated) return null;
+            return Formatter.EmailId(identity.Name) ? _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Email), identity.Name) : _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Mobile), identity.Name);
         }
     }
 }

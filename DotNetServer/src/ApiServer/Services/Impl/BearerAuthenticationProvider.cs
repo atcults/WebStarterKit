@@ -12,6 +12,8 @@ namespace WebApp.Services.Impl
         {
             if (!context.Request.Headers.ContainsKey("Authorization")) return Task.FromResult<object>(null);
             var data = context.Request.Headers.Get("Authorization").Split(' ');
+            if (data.Length != 2) return Task.FromResult<object>(null);
+
             if (data[0].Equals("bearer", StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Token = data[1];

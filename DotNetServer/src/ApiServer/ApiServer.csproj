@@ -171,9 +171,6 @@
     <Compile Include="Controllers\SmartApiController.cs" />
     <Compile Include="Controllers\TaskLogController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
-    <Compile Include="Filters\AddChallengeOnUnauthorizedResult.cs" />
-    <Compile Include="Filters\AuthenticationFailureResult.cs" />
-    <Compile Include="Filters\DeviceAuthenticationAttribute.cs" />
     <Compile Include="Formatters\JsonNetFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,8 +210,6 @@
     <Compile Include="Services\Impl\BearerAuthenticationProvider.cs" />
     <Compile Include="Services\Impl\RefreshTokenProvider.cs" />
     <Compile Include="Services\IRefreshTokenProvider.cs" />
-    <Compile Include="Services\IReportDataProvider.cs" />
-    <Compile Include="Services\Impl\ReportDataProvider.cs" />
     <Compile Include="Services\Impl\UserSession.cs" />
     <Compile Include="Services\IUserSession.cs" />
     <Compile Include="Initialization\OwinStartup.cs" />

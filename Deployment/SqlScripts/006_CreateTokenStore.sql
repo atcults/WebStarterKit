@@ -15,13 +15,14 @@ CREATE TABLE [dbo].[TokenStore](
 	[UserId] [uniqueidentifier] NOT NULL,
 	[UserName] [varchar](256) NULL,
 	[AccessTokenHash] [varchar](256) NULL,
+	[AccessTicket] [varchar](1024) NULL,
 	[AccessTokenIssuedUtc] [datetime] NULL,
 	[AccessTokenExpiresUtc] [datetime] NULL,
 	[RefreshTokenHash] [varchar](256) NULL,
+	[RefreshTicket] [varchar](1024) NULL,
 	[RefreshTokenIssuedUtc] [datetime] NULL,
 	[RefreshTokenExpiresUtc] [datetime] NULL,
-	[TimesTokenGiven] [integer] NULL,
-	[ProtectedTicket] [varchar](1024) NULL,
+	[TimesTokenGiven] [integer] NULL	
 CONSTRAINT [PK_TokenStore] PRIMARY KEY CLUSTERED 
 	([Id] ASC)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -42,13 +43,14 @@ AS
 	,TS.[UserId]
 	,TS.[UserName]
 	,TS.[AccessTokenHash]
+	,TS.[AccessTicket]
 	,TS.[AccessTokenIssuedUtc]
 	,TS.[AccessTokenExpiresUtc]
 	,TS.[RefreshTokenHash]
+	,TS.[RefreshTicket]
 	,TS.[RefreshTokenIssuedUtc]
 	,TS.[RefreshTokenExpiresUtc]
 	,TS.[TimesTokenGiven]
-	,TS.[ProtectedTicket]
 	From TokenStore TS
 
 GO
@@ -67,13 +69,14 @@ CREATE PROC [dbo].[usp_TokenStoreInsert]
 	,@UserId  [uniqueidentifier]
 	,@UserName [varchar](256)  = NULL
 	,@AccessTokenHash [varchar](256)  = NULL
+	,@AccessTicket [varchar](1024)  = NULL
 	,@AccessTokenIssuedUtc [datetime]  = NULL
 	,@AccessTokenExpiresUtc [datetime]  = NULL
 	,@RefreshTokenHash [varchar](256)  = NULL
+	,@RefreshTicket [varchar](1024)  = NULL
 	,@RefreshTokenIssuedUtc [datetime]  = NULL
 	,@RefreshTokenExpiresUtc [datetime]  = NULL
 	,@TimesTokenGiven [integer]  = NULL
-	,@ProtectedTicket [varchar](1024)  = NULL
 
 AS
 	SET NOCOUNT ON 
@@ -81,9 +84,10 @@ AS
 
 	BEGIN TRAN
 
-	INSERT INTO [dbo].[TokenStore] ([Id], [ClientName], [UserId], [UserName], [AccessTokenHash], [AccessTokenIssuedUtc], [AccessTokenExpiresUtc], [RefreshTokenHash], [RefreshTokenIssuedUtc], [RefreshTokenExpiresUtc], [TimesTokenGiven], [ProtectedTicket])
+	INSERT INTO [dbo].[TokenStore] ([Id], [ClientName], [UserId], [UserName], [AccessTokenHash], [AccessTicket], [AccessTokenIssuedUtc], [AccessTokenExpiresUtc], [RefreshTokenHash], [RefreshTicket], [RefreshTokenIssuedUtc], [RefreshTokenExpiresUtc], [TimesTokenGiven])
 
-	SELECT @Id, @ClientName, @UserId, @UserName, @AccessTokenHash, @AccessTokenIssuedUtc, @AccessTokenExpiresUtc, @RefreshTokenHash, @RefreshTokenIssuedUtc, @RefreshTokenExpiresUtc, @TimesTokenGiven, @ProtectedTicket
+	SELECT @Id, @ClientName, @UserId, @UserName, @AccessTokenHash, @AccessTicket, @AccessTokenIssuedUtc, @AccessTokenExpiresUtc, @RefreshTokenHash, @RefreshTicket, @RefreshTokenIssuedUtc, @RefreshTokenExpiresUtc, @TimesTokenGiven
+	
 	COMMIT;
 
 	SELECT
@@ -92,13 +96,14 @@ AS
 	,TS.[UserId]
 	,TS.[UserName]
 	,TS.[AccessTokenHash]
+	,TS.[AccessTicket]
 	,TS.[AccessTokenIssuedUtc]
 	,TS.[AccessTokenExpiresUtc]
 	,TS.[RefreshTokenHash]
+	,TS.[RefreshTicket]
 	,TS.[RefreshTokenIssuedUtc]
 	,TS.[RefreshTokenExpiresUtc]
 	,TS.[TimesTokenGiven]
-	,TS.[ProtectedTicket]
 	From TokenStore TS
 	WHERE TS.[Id] = @Id
 
@@ -116,13 +121,14 @@ CREATE PROC [dbo].[usp_TokenStoreUpdate]
 	,@UserId  [uniqueidentifier]
 	,@UserName [varchar](256)  = NULL
 	,@AccessTokenHash [varchar](256)  = NULL
+	,@AccessTicket [varchar](1024)  = NULL
 	,@AccessTokenIssuedUtc [datetime]  = NULL
 	,@AccessTokenExpiresUtc [datetime]  = NULL
 	,@RefreshTokenHash [varchar](256)  = NULL
+	,@RefreshTicket [varchar](1024)  = NULL
 	,@RefreshTokenIssuedUtc [datetime]  = NULL
 	,@RefreshTokenExpiresUtc [datetime]  = NULL
 	,@TimesTokenGiven [integer]  = NULL
-	,@ProtectedTicket [varchar](1024)  = NULL
 
 AS
 	SET NOCOUNT ON 
@@ -131,8 +137,7 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[TokenStore]
-	SET [Id] = @Id, [ClientName] = @ClientName, [UserId] = @UserId, [UserName] = @UserName, [AccessTokenHash] = @AccessTokenHash, [AccessTokenIssuedUtc] = @AccessTokenIssuedUtc, [AccessTokenExpiresUtc] = @AccessTokenExpiresUtc, [RefreshTokenHash] = @RefreshTokenHash, [RefreshTokenIssuedUtc] = @RefreshTokenIssuedUtc, [RefreshTokenExpiresUtc] = @RefreshTokenExpiresUtc, [TimesTokenGiven] = @TimesTokenGiven, [ProtectedTicket] = @ProtectedTicket	WHERE [Id] = @Id
-
+	SET [Id] = @Id, [ClientName] = @ClientName, [UserId] = @UserId, [UserName] = @UserName, [AccessTokenHash] = @AccessTokenHash, [AccessTicket] = @AccessTicket, [AccessTokenIssuedUtc] = @AccessTokenIssuedUtc, [AccessTokenExpiresUtc] = @AccessTokenExpiresUtc, [RefreshTokenHash] = @RefreshTokenHash, [RefreshTicket] = @RefreshTicket, [RefreshTokenIssuedUtc] = @RefreshTokenIssuedUtc, [RefreshTokenExpiresUtc] = @RefreshTokenExpiresUtc, [TimesTokenGiven] = @TimesTokenGiven WHERE [Id] = @Id
 
 	COMMIT;
 
@@ -142,13 +147,14 @@ AS
 	,TS.[UserId]
 	,TS.[UserName]
 	,TS.[AccessTokenHash]
+	,TS.[AccessTicket]
 	,TS.[AccessTokenIssuedUtc]
 	,TS.[AccessTokenExpiresUtc]
 	,TS.[RefreshTokenHash]
+	,TS.[RefreshTicket]
 	,TS.[RefreshTokenIssuedUtc]
 	,TS.[RefreshTokenExpiresUtc]
 	,TS.[TimesTokenGiven]
-	,TS.[ProtectedTicket]
 	From TokenStore TS
 	WHERE TS.[Id] = @Id
 

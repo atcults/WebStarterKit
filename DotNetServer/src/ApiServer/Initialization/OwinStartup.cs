@@ -9,7 +9,6 @@ using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using WebApp.Filters;
 using WebApp.Formatters;
 using WebApp.Initialization;
 using WebApp.Services;
@@ -26,10 +25,10 @@ namespace WebApp.Initialization
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             
             ClientEndPoint.Initialize();
-            
-            RegisterWebApi();
 
             ConfigureOAuth(app);
+
+            RegisterWebApi();
             
           //  KeepAlive.Start();
         }
@@ -39,8 +38,6 @@ namespace WebApp.Initialization
             var configuration = GlobalConfiguration.Configuration;
             configuration.MapHttpAttributeRoutes();
             configuration.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
-            
-            configuration.Filters.Add(new DeviceAuthenticationAttribute()); 
             
             var jsonSettings = new JsonSerializerSettings
             {

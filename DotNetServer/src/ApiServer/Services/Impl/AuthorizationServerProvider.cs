@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Common.Enumerations;
@@ -120,7 +121,10 @@ namespace WebApp.Services.Impl
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
+            identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
+
+            //Strange: below line does not work. Need to recheck again.
+            //identity.AddClaim(new Claim(ClaimTypes.Name, user.Id.ToString()));
 
             var tokenId = GuidComb.New();
             
@@ -129,7 +133,7 @@ namespace WebApp.Services.Impl
                 { "as:client_id", context.ClientId },
                 { "as:token_id", tokenId.ToString() },
                 { "as:user_id", user.Id.ToString()},
-                { "as:user_name", user.Name }
+                { "as:user_name", context.UserName }
             });
 
             var ticket = new AuthenticationTicket(identity, propserties);
@@ -170,6 +174,10 @@ namespace WebApp.Services.Impl
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
         {
             var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
+            var tokenId = Guid.Parse(context.Ticket.Properties.Dictionary["as:token_id"]);
+            var userId = Guid.Parse(context.Ticket.Properties.Dictionary["as:user_id"]);
+            var username = context.Ticket.Properties.Dictionary["as:user_name"];
+            
             var currentClient = context.ClientId;
 
             if (originalClient != currentClient)
@@ -178,15 +186,29 @@ namespace WebApp.Services.Impl
                 return Task.FromResult<object>(null);
             }
 
-            // Change auth ticket for refresh token requests
-            var newIdentity = new ClaimsIdentity(context.Ticket.Identity);
+            var user = _appUserViewRepository.GetById(userId);
 
-            newIdentity.AddClaim(new Claim("newClaim", "newValue"));
+            if (user == null)
+            {
+                context.SetError("invalid_grant", UserDoesNotExistMssg);
+                return Task.FromResult<object>(null);
+            }
 
-            var newTicket = new AuthenticationTicket(newIdentity, context.Ticket.Properties);
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-            context.Validated(newTicket);
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Name));
 
+            var propserties = new AuthenticationProperties(new Dictionary<string, string>
+            {
+                { "as:client_id", context.ClientId },
+                { "as:token_id", tokenId.ToString() },
+                { "as:user_id", user.Id.ToString()},
+                { "as:user_name", username }
+            });
+
+            var ticket = new AuthenticationTicket(identity, propserties);
+
+            context.Validated(ticket);
             return Task.FromResult<object>(null);
         }
 

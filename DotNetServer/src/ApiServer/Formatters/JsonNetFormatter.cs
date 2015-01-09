@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
@@ -69,7 +70,23 @@ namespace WebApp.Formatters
                 if (type == typeof (HttpError))
                 {
                     var httpError = (HttpError) value;
-                    error.AddError("HttpError", httpError.ExceptionMessage);
+                    if (!string.IsNullOrEmpty(httpError.Message))
+                    {
+                        error.AddError("Message", httpError.Message);
+                    }
+                    if (!string.IsNullOrEmpty(httpError.MessageDetail))
+                    {
+                        error.AddError("MessageDetail", httpError.MessageDetail);
+                    }
+                    if (!string.IsNullOrEmpty(httpError.ExceptionType))
+                    {
+                        error.AddError("ExceptionType", httpError.ExceptionMessage);
+                    }
+
+                    foreach (var val in httpError)
+                    {
+                        error.AddError(val.Key, val.Value.ToString());
+                    }
                 }
                 else
                 {

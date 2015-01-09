@@ -35,20 +35,32 @@ namespace NSBus.Server.CommandHandlers
             var from = command.TimeUtc;
             var tillAccess = from.AddMinutes(client.AccessTokenLifeTime);
 
-            var token = new TokenStore
+            var token = _tokenStoreRepository.GetById(command.TokenId);
+
+            if (token == null)
             {
-                Id = command.TokenId,
-                ClientName = command.Client,
-                UserId = command.UserId,
-                UserName = command.UserName,
-                AccessTokenHash = command.AccessTokenHash,
-                AccessTokenIssuedUtc = from,
-                AccessTokenExpiresUtc = tillAccess,
-                ProtectedTicket = command.ProtectedTicket
-            };
-
-            _tokenStoreRepository.Add(token);
-
+                token = new TokenStore
+                {
+                    Id = command.TokenId,
+                    ClientName = command.Client,
+                    UserId = command.UserId,
+                    UserName = command.UserName,
+                    AccessTokenHash = command.AccessTokenHash,
+                    AccessTicket = command.ProtectedTicket,
+                    AccessTokenIssuedUtc = from,
+                    AccessTokenExpiresUtc = tillAccess
+                };
+                _tokenStoreRepository.Add(token);
+            }
+            else
+            {
+                token.AccessTokenHash = command.AccessTokenHash;
+                token.AccessTicket = command.ProtectedTicket; 
+                token.AccessTokenIssuedUtc = from;
+                token.AccessTokenExpiresUtc = tillAccess;
+                _tokenStoreRepository.Update(token);
+            }
+            
             Bus.SendLocal(new SendNotificationCommand
             {
                 UserId = command.UserId,
