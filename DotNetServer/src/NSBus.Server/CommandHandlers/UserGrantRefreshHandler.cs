@@ -30,6 +30,7 @@ namespace NSBus.Server.CommandHandlers
             token.RefreshTicket = command.ProtectedTicket;
             token.RefreshTokenIssuedUtc = from;
             token.RefreshTokenExpiresUtc = tillRefresh;
+            token.TimesTokenGiven = token.TimesTokenGiven.GetValueOrDefault(0) + 1;
 
             _tokenStoreRepository.Update(token);
         }

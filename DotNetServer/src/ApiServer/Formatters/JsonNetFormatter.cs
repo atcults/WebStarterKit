@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
@@ -27,7 +27,7 @@ namespace WebApp.Formatters
             return true;
         }
         
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, System.Net.Http.HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
         {
             // Create a serializer
             var serializer = JsonSerializer.Create(_jsonSerializerSettings);
@@ -50,7 +50,7 @@ namespace WebApp.Formatters
             return true;
         }
         
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, System.Net.Http.HttpContent content, TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
         {
             // Create a serializer
             var serializer = JsonSerializer.Create(_jsonSerializerSettings);

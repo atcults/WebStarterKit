@@ -46,9 +46,11 @@ namespace WebApp.Controllers
             return ExecuteCommand(command);
         }
 
-        public HttpResponseMessage Delete(string token)
+        public HttpResponseMessage Delete()
         {
             var response = new WebApiResponseBase();
+
+            var token = Request.Headers.Authorization.Parameter;
 
             _bus.Send<RemoveTokenCommand>(c =>
             {

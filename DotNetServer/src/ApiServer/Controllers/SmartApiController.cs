@@ -30,6 +30,7 @@ namespace WebApp.Controllers
 
         protected AppUserView GetCurrentUser()
         {
+            var owinContext = Request.GetOwinContext(); //This can be usefull for automapper resolving current user.
             var username = RequestContext.Principal.Identity.Name;
             return Formatter.EmailId(username) ? _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Email), username) : _appUserViewRepository.GetByKey(Property.Of<AppUserView>(x => x.Mobile), username);
         }
