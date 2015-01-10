@@ -72,6 +72,7 @@ namespace WebApp.Services.Impl
             if (tokenStoreView != null)
             {
                 context.DeserializeTicket(tokenStoreView.AccessTicket);
+                
             }
 
             return Task.FromResult<object>(null);

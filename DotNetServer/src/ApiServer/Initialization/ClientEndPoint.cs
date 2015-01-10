@@ -43,7 +43,7 @@ namespace WebApp.Initialization
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
 
             var configuration = new BusConfiguration();
-            configuration.EndpointName("ApiServer");
+            configuration.EndpointName("WebStarter.API");
             configuration.UseSerialization<JsonSerializer>();
             configuration.Transactions().Enable();
             configuration.AutoSubscribe().AutoSubscribePlainMessages();

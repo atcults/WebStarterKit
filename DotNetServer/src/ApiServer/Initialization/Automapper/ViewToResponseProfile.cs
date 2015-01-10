@@ -28,7 +28,6 @@ namespace WebApp.Initialization.Automapper
             CreateMap<AppUserView, AppUserResponse>();
 
             CreateMap<AppUserView, AppUserLine>()
-                .ForMember(x => x.RoleName, o => o.Ignore())
                 .ForMember(x => x.UserStatusName, o => o.Ignore());
 
             CreateMap<Page<AppUserView>, PageResponse<AppUserLine>>();

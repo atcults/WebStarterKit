@@ -28,8 +28,8 @@ namespace NSBus.Server
 
             AutoMapperConfiguration.Configure(Container.GetInstance);
             SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
-            
-            configuration.EndpointName("ApiServerService");
+
+            configuration.EndpointName("WebStarter.BUS");
             configuration.UseSerialization<JsonSerializer>();
             configuration.Transactions().Enable();
             configuration.UseContainer<StructureMapBuilder>(c => c.ExistingContainer(Container));

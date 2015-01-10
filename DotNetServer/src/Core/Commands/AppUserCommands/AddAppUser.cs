@@ -30,9 +30,6 @@ namespace Core.Commands.AppUserCommands
             if (!Formatter.EmailId(Email))
                 validationResult.AddError("Email", " is not valid.");
             
-            if (ProfileId == null)
-                validationResult.AddError("Profile", " should be selected.");
-
             if (UserStatus == null)
                 validationResult.AddError("User Status", " should be selected.");
 
