@@ -1,6 +1,9 @@
 Quick start FrontEnd Web Template
 =====================================
 
+##TODO
+Need to modify this document based on change in project structure.
+
 ## Introduction
 This repository is for providing samples in AngularJS, JAVA, NODE and ASP.net.
 
