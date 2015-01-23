@@ -26,7 +26,7 @@ Simple specify your routes along with its lazy dependencies in `app/scripts/rout
 ## How to run node demo
 * Install node.js
 * Run `npm install` from within the root project directory to install relevant dependencies
-* Run 'npm install -g bower' from within root project directory to install bower and -g is for to install it globally.
+* Run `npm install -g bower` from within root project directory to install bower and -g is for to install it globally.
 * Run `bower install` from within the root project directory to install relevant bower components
 * Run `npm start` from within the root project directory to start the app
 * Open `http://localhost:8000/` in the browser

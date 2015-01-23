@@ -1,5 +1,12 @@
 .gradle
+
+
+# INTELLIJ IDEA IGNORES
+*.iml
+*.ipr
+*.iws
 .idea
+
 
 build/
 logs/
